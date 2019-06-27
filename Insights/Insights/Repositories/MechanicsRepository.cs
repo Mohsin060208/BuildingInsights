@@ -51,7 +51,6 @@ namespace Repository
                 cmd.Parameters.AddWithValue("@Type", mechanics.Type);
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
-
                 while (rdr.Read())
                 {
                     chartData.Add(new object[]
@@ -61,6 +60,7 @@ namespace Repository
 
                     });
                 }
+                con.Close();
             }
             return chartData;
         }

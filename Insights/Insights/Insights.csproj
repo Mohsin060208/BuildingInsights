@@ -103,7 +103,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Repositories\MechanicsRepository.cs" />
-    <Compile Include="Repositories\YearlyRecordBook.cs" />
+    <Compile Include="Repositories\YearlyRecordBookRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

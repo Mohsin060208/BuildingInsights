@@ -27,6 +27,7 @@ namespace Repository
                 {
                     yrb.TotalCost = Convert.ToInt64(rdr["TotalCost"]);
                 }
+                con.Close();
             }
             return yrb;
         }
