@@ -10,50 +10,6 @@
     google.charts.setOnLoadCallback(drawChartBoilerCost);
     google.charts.setOnLoadCallback(drawChartChillerFailure);
     google.charts.setOnLoadCallback(drawChartChillerCost);
-    function GetTotalCost() {
-        $.ajax({
-            type: "GET",
-            url: "/api/YearlyRecordBook/GetTotalCost",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                "Year": 2018,
-                "BuildingId": 1
-            },
-            success: function (r) {
-                document.getElementById("p-total-cost").innerText = ("$" + r.TotalCost);
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
-    function GetTotalSaving() {
-        $.ajax({
-            type: "GET",
-            url: "/api/YearlyRecordBook/GetTotalSaving",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                "Year": 2018,
-                "BuildingId": 1
-            },
-            success: function (r) {
-                document.getElementById("p-total-saving").innerText = ("$" + r.TotalSaving);
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
 })
 $('#button-save-insights').click(function () {
     SaveTotalCost();
@@ -117,26 +73,7 @@ function SaveTotalCost() {
                 BuildingId: 1
             },
             success: function (r) {
-                $.ajax({
-                    type: "GET",
-                    url: "/api/YearlyRecordBook/GetTotalCost",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: {
-                        "Year": 2018,
-                        "BuildingId": 1
-                    },
-                    success: function (r) {
-                        document.getElementById("p-total-cost").innerText = ("$" + r.TotalCost);
-                    },
-                    failure: function (r) {
-                        alert(r);
-                    },
-                    error: function (r) {
-                        alert(r);
-                    }
-                });
+                GetTotalCost();
                 $("#tb-total-cost").val("")
             },
             failure: function (r) {
@@ -160,26 +97,7 @@ function SaveTotalSaving() {
                 BuildingId: 1
             },
             success: function (r) {
-                $.ajax({
-                    type: "GET",
-                    url: "/api/YearlyRecordBook/GetTotalSaving",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: {
-                        "Year": 2018,
-                        "BuildingId": 1
-                    },
-                    success: function (r) {
-                        document.getElementById("p-total-saving").innerText = ("$" + r.TotalSaving);
-                    },
-                    failure: function (r) {
-                        alert(r);
-                    },
-                    error: function (r) {
-                        alert(r);
-                    }
-                });
+                GetTotalSaving();
                 $("#tb-total-savings").val("");
             },
             failure: function (r) {
@@ -650,4 +568,54 @@ function drawChartChillerFailure() {
                 alert(r);
             }
         });
-    }
+}
+function GetTotalCost() {
+    $.ajax({
+        type: "GET",
+        url: "/api/YearlyRecordBook/GetTotalCost",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "Year": $("#select-year-cost").val(),
+            "BuildingId": 1
+        },
+        success: function (r) {
+            document.getElementById("p-total-cost").innerText = ("$" + r.TotalCost);
+        },
+        failure: function (r) {
+            alert(r);
+        },
+        error: function (r) {
+            alert(r);
+        }
+    });
+}
+function GetTotalSaving() {
+    $.ajax({
+        type: "GET",
+        url: "/api/YearlyRecordBook/GetTotalSaving",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "Year": $("#select-year-saving").val(),
+            "BuildingId": 1
+        },
+        success: function (r) {
+            document.getElementById("p-total-saving").innerText = ("$" + r.TotalSaving);
+        },
+        failure: function (r) {
+            alert(r);
+        },
+        error: function (r) {
+            alert(r);
+        }
+    });
+}
+$("#select-year-saving").change(function () {
+    GetTotalSaving();
+});
+$("#select-year-cost").change(function () {
+    GetTotalCost();
+});

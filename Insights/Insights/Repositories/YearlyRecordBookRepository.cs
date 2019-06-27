@@ -25,7 +25,7 @@ namespace Repository
 
                 while (rdr.Read())
                 {
-                    yrb.TotalCost = Convert.ToInt64(rdr["TotalCost"]);
+                        yrb.TotalCost = Convert.ToInt64(rdr["TotalCost"]);
                 }
                 con.Close();
             }
@@ -41,7 +41,6 @@ namespace Repository
                 cmd.Parameters.AddWithValue("@BuildingId", yrb.BuildingId);
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
-
                 while (rdr.Read())
                 {
                     yrb.TotalSaving = Convert.ToInt64(rdr["TotalSaving"]);
