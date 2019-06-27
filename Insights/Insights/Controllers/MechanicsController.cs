@@ -13,6 +13,7 @@ namespace Insights.Controllers
         {
             _mechanicsRepository = new MechanicsRepository();
         }
+
         [ActionName("GetFailureChartData")]
         [HttpGet]
         public List<object> GetFailureChartData([FromUri] Mechanics mechanics)
@@ -22,7 +23,7 @@ namespace Insights.Controllers
 
         [ActionName("GetCostChartData")]
         [HttpGet]
-        public List<object> GetCostChartData(Mechanics mechanics)
+        public List<object> GetCostChartData([FromUri] Mechanics mechanics)
         {
             return _mechanicsRepository.GetMechanicsCostByType(mechanics);
         }

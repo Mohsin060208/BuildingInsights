@@ -298,7 +298,6 @@ function drawChartElevatorFailure() {
     $.ajax({
         type: "GET",
         url: "/api/mechanics/GetFailureChartData",
-        dataType: "json",
         data: {"Type": "Elevator"},
         headers: {
             'Content-Type': 'application/json'
@@ -330,10 +329,12 @@ function drawChartElevatorSpend() {
         legend: { position: "none" },
     };
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/api/mechanics/GetCostChartData",
-        dataType: "json",
-        data: { Type: "Elevator" },
+        data: { "Type": "Elevator" },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         success: function (r) {
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-elevator-spend"));
@@ -359,10 +360,12 @@ function drawChartPlumberSpend() {
         legend: { position: "none" },
     };
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/api/mechanics/GetCostChartData",
-        dataType: "json",
-        data: { Type: "Plumbing" },
+        data: { "Type": "Plumbing" },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         success: function (r) {
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-plumber-spend"));
@@ -388,10 +391,12 @@ function drawChartPlumberOperational() {
         legend: { position: "none" },
     };
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/api/mechanics/GetCostChartData",
-        dataType: "json",
-        data: { Type: "Operational Plumbing" },
+        data: { "Type": "Operational Plumbing" },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         success: function (r) {
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-plumber-operational"));
@@ -419,7 +424,6 @@ function drawChartBoilerFailure() {
     $.ajax({
         type: "GET",
         url: "/api/mechanics/GetFailureChartData",
-        dataType: "json",
         data: { "Type": "Boiler" },
         headers: {
             'Content-Type': 'application/json'
@@ -449,10 +453,12 @@ function drawChartBoilerCost() {
         legend: { position: "none" },
     };
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/api/mechanics/GetCostChartData",
-        dataType: "json",
         data: { Type: "Boiler" },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         success: function (r) {
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-boiler-cost"));
@@ -480,7 +486,6 @@ function drawChartChillerFailure() {
     $.ajax({
         type: "GET",
         url: "/api/mechanics/GetFailureChartData",
-        dataType: "json",
         data: { "Type": "Chiller" },
         headers: {
             'Content-Type': 'application/json'
@@ -510,10 +515,12 @@ function drawChartChillerCost() {
         legend: { position: "none" },
     };
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/api/mechanics/GetCostChartData",
-        dataType: "json",
         data: { Type: "Chiller" },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         success: function (r) {
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-chiller-cost"));
