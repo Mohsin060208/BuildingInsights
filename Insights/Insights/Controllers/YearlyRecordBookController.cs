@@ -19,14 +19,14 @@ namespace Insights.Controllers
         }
         [ActionName("GetTotalCost")]
         [HttpGet]
-        public YearlyRecordBook GetTotalCost(YearlyRecordBook yrb)
+        public YearlyRecordBook GetTotalCost([FromUri] YearlyRecordBook yrb)
         {
             return _yrb.GetTotalCost(yrb);
         }
 
         [ActionName("GetTotalSaving")]
         [HttpGet]
-        public YearlyRecordBook GetTotalSaving(YearlyRecordBook yrb)
+        public YearlyRecordBook GetTotalSaving([FromUri] YearlyRecordBook yrb)
         {
             return _yrb.GetTotalSaving(yrb);
         }
