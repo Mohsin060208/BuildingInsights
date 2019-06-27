@@ -2,7 +2,7 @@
 
 namespace Insights.ViewModels
 {
-    public class MechanicsViewModel
+    public class YearlyRecordBookViewModel
     {
         public int Id { get; set; }
         public string Type { get; set; }
