@@ -47,45 +47,58 @@
 $('#button-save-insights').click(function () {
     SaveInsights();
 })
+function SaveInsights() {
+    SaveTotalCost();
+}
+function SaveTotalCost(model) {
+    $.ajax({
+        type: "POST",
+        url: "/api/YearlyRecordBook/InsertUpdateTotalCost",
+        data: {
+            Year: model.Year,
+            TotalCost: model.TotalCost,
+            BuildingId: 1
+        },
+        success: function (r) {
+           
+            $.ajax({
+                type: "POST",
+                url: "/api/YearlyRecordBook/GetTotalCost",
+                dataType: "json",
+                data: {
+                    Year: 2018,
+                    BuildingId: 1
+                },
+                success: function (r) {
+                    document.getElementById(model.P_TotalCost).innerText = ("$" + r.TotalCost);
+                    document.getElementById(model.Tb_TotalCost).innerText = "";
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        },
+        failure: function (r) {
+            alert(r.d);
+        },
+        error: function (r) {
+            alert(r.d);
+        }
+    });
+}
+$('#button-total-cost-save').click(function () {
+    var model = {
+        Year: $("#select-year-cost").val(),
+        TotalCost: $("#tb-total-cost").val(),
+        P_TotalCost: "p-total-cost",
+        Tb_TotalCost: "tb-total-cost"
+    }
+    SaveTotalCost(model)
+})
 
- $('#button-total-cost-save').click(function () {
-        $.ajax({
-            type: "POST",
-            url: "/api/YearlyRecordBook/InsertUpdateTotalCost",
-            data: {
-                Year: $("#select-year-cost").val(),
-                TotalCost: $("#tb-total-cost").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-total-cost").val("");
-                $.ajax({
-                    type: "POST",
-                    url: "/api/YearlyRecordBook/GetTotalCost",
-                    dataType: "json",
-                    data: {
-                        Year: 2018,
-                        BuildingId: 1
-                    },
-                    success: function (r) {
-                        document.getElementById("p-total-cost").innerText = ("$" + r.TotalCost);
-                    },
-                    failure: function (r) {
-                        alert(r.d);
-                    },
-                    error: function (r) {
-                        alert(r.d);
-                    }
-                });
-            },
-            failure: function (r) {
-                alert(r.d);
-            },
-            error: function (r) {
-                alert(r.d);
-            }
-        });
-    })
     $('#button-total-savings-save').click(function () {
         $.ajax({
             type: "POST",
