@@ -1,0 +1,160 @@
+﻿@model ASPWebAPI_CRUD.Models.User
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Account</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Fill in the following form to create an account.</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Male:   @Html.RadioButton("Gender", "Male")
+                Female: @Html.RadioButton("Gender", "Female")
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("City",
+                new SelectList(new List<SelectListItem>()
+                {
+                    new SelectListItem() { Text = "Abbotabad", Value = "Abbotabad"},
+                    new SelectListItem() { Text = "Bahawalpur", Value = "Bahawalpur"},
+                    new SelectListItem() { Text = "Chiniot", Value = "Chiniot"},
+                    new SelectListItem() { Text = "Dera Ghazi Khan", Value = "Dera Ghazi Khan"},
+                    new SelectListItem() { Text = "Faisalabad", Value = "Faisalabad"},
+                    new SelectListItem() { Text = "Haiderabad", Value = "Haiderabad"},
+                    new SelectListItem() { Text = "Islamabad", Value = "Islamabad"},
+                    new SelectListItem() { Text = "Karachi", Value = "Karachi"},
+                    new SelectListItem() { Text = "Lahore", Value = "Lahore"},
+                    new SelectListItem() { Text = "Multan", Value = "Multan"}}
+                , "Value", "Text"),
+                "Select City",
+                new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" id="submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Home", "Index", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+    //
+    $(function () {
+         $(document).on("submit", "form", function(event)
+    {
+        event.preventDefault();
+        $.ajax({
+                    url: "/api/UserAPI",
+                    type: 'POST',
+            data: {
+             FirstName: $("#FirstName").val(),
+             LastName: $("#LastName").val(),
+             Email: $("#Email").val(),
+             Password: $("#Password").val(),
+             Phone: $("#Phone").val(),
+             Gender: $("#Gender").val(),
+             City: $("#City").val()
+            },
+                    success: function (response) {
+                        alert(response);
+                    }
+                });
+    });
+        //$('#submit').on('click', function (event) {
+        //    event.preventDefault();
+        //    if ($('form').valid) {
+        //        $.ajax({
+        //        type: "POST",
+        //        url: "/api/UserAPI/AddUser",
+        //        data: $('form').serialize(),
+        //        processData: false,
+        //        contentType: false,
+        //        error: function (jqXHR, textStatus, errorMessage) {
+        //            console.log(errorMessage); // Optional
+        //        },
+        //        success: function (data) { console.log(data) }
+        //    });
+        //    }
+
+        //});
+    });
+        //$(function () {
+        //    $('#submit').on('click', function (evt) {
+        //        evt.preventDefault();
+        //        $.post('/api/UserAPI/AddUser', $('form').serialize(), function () {
+        //            alert('Posted using jQuery');
+        //        });
+        //    });
+        //});
+    </script>
+}
+

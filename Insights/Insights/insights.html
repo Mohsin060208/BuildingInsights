@@ -1,0 +1,1022 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="Content/style.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/51a4b576a8.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <title>Insights</title>
+</head>
+
+<body>
+    <div class="container-fluid pt-4 pl-5 pr-5">
+        <div>
+            <h3 id="heading-building-insights">Building Insights</h3>
+            <hr id="hr-building-insights-heading">
+        </div>
+        <div id="div-building-insights">
+            <div class="row">
+                <div class="col-lg-4 mt-4">
+                    <div class="bg-white text-center pt-3 pb-5 pl-3 pr-3">
+                        <div class="pt-3">
+                            <h6>Total Maintenance Costs</h6>
+                            <hr>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <div class="bg-green div-circle">
+                                    <div class="row pt-1">
+                                        <div class="col-12 pt-3">
+                                            <i class="fa fa-arrow-down fa-5x" style="color: white;"></i>
+                                            <p id="p-total-cost" class="p-arrow text-center mt-1">
+                                                Please Wait...
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pt-2 pb-2" id="div-building-total-cost">
+                        <div class="col-12 text-center">
+                            <div class="pt-3 pb-3 pl-3 pr-3 bg-white">
+                                <select id="select-year-cost">
+                                    <option value="2017">2017</option>
+                                    <option value="2018" selected>2018</option>
+                                    <option value="2019">2019</option>
+                                </select>
+                                <input type="text" name="total-cost" id="tb-total-cost" class="textbox-building"
+                                       placeholder="Total Cost">
+                                <button class="button-save-building ml-2" type="button" id="button-total-cost-save">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-4">
+                    <div class="bg-white text-center pt-2 pb-5 pl-3 pr-3">
+                        <h6>Year Over Year</h6>
+                        <h6>Maintenance Cost Increase/Decrease</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <div class="bg-green div-circle">
+                                    <div class="row pt-1">
+                                        <div class="col-md-12 pt-3 text-center">
+                                            <i class="fa fa-arrow-down fa-5x" style="color: white;"></i>
+                                            <p id="p-total-saving" class="p-arrow text-center mt-1 ">
+                                                Please Wait...
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pt-2 pb-2" id="div-building-total-savings">
+                        <div class="col-12 text-center">
+                            <div class="pt-3 pb-3 pl-3 pr-3 bg-white">
+                                <select id="select-year-saving">
+                                    <option value="2017">2017</option>
+                                    <option value="2018" selected>2018</option>
+                                    <option value="2019">2019</option>
+                                </select>
+                                <input type="text" name="total-savings" id="tb-total-savings" class="textbox-building"
+                                       placeholder="Total Savings">
+                                <button class="button-save-building ml-2" type="button" id="button-total-savings-save">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-4">
+                    <div class="bg-white pt-2 pb-5 pl-3 pr-3">
+                        <div class="text-center">
+                            <h6>Year Over Year</h6>
+                            <h6>Percentage Increase/Decrease</h6>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <div class="bg-green div-circle text-center">
+                                    <div class="row pt-1">
+                                        <div class="col-12 pt-3 text-center">
+                                            <i class="fa fa-arrow-down fa-5x" style="color: white;"></i>
+                                            <p class="p-arrow mt-1">
+                                                0.05%
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 mb-4">
+            <div class="col-12 d-flex justify-content-end">
+                <button class="button-reports" type="button">Condolytics Suggestions Report</button>
+            </div>
+        </div>
+        <div id="div-elevator-insights">
+            <div class="row" id="div-elevator-insights-heading">
+                <div class="col-12">
+                    <div class="bg-white pl-3 pt-3 pb-3">
+                        <h4>Elevator Insights</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mt-3">
+                    <div class="bg-white pl-3 pt-3 pr-3">
+                        <h4 class="clr-silver">Elevator A</h4>
+                        <hr>
+                        <div class="row pb-5">
+                            <div class="col-md text-center pt-5">
+                                <img src="Content/Images/riskometer.png" class="img-fluid">
+                            </div>
+                            <div class="col-md text-center">
+                                <img src="Content/Images/elevator.png" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <div class="bg-white pl-3 pt-3 pr-3">
+                        <h4 class="clr-silver">Elevator B</h4>
+                        <hr>
+                        <div class="row pb-5">
+                            <div class="col-md text-center">
+                                <img src="Content/Images/elevator.png" class="img-fluid">
+                            </div>
+                            <div class="col-md text-center pt-5">
+                                <img src="Content/Images/riskometer.png" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-1">
+                <div class="col-lg-8 pt-3 pb-2 ">
+                    <div class="bg-white pt-3 pl-3 pr-3 pb-3">
+                        <h6>Elevator Failure Trends Reported</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <div id="chart-elevator-failure" style="height: 200px;" class="text-center">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 pt-3 pb-3 ">
+                    <div class="bg-white pt-3 pb-5 pl-3 pr-3">
+                        <h6>Annual Failure Rate Increase/Decrease</h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12 pt-3 d-flex justify-content-center">
+                                <div class="bg-green div-circle text-center">
+                                    <div class="row pt-1">
+                                        <div class="col-md-12 pt-3 text-center">
+                                            <i class="fa fa-arrow-down fa-5x" style="color: white;"></i>
+                                            <p class="p-arrow mt-1">
+                                                90.77%
+                                            </p>
+                                            <p class="pt-4 f12 text-center text-wrap clr-silver">
+                                                Compared to Previous
+                                                Year
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-5 mb-5" id="div-elevator-failure-management">
+                <div class="col-xl-3 pb-2">
+                    <div class="bg-white pb-3 pt-3 pr-3 pl-3">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-xs-3 pt-2 pl-1">
+                                <div class="bg-green div-circle-smaller">
+                                    <div class="row">
+                                        <div class="col-md text-center pt-1">
+                                            <i class="fa fa-arrow-down" style="color: white;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 pl-3 pr-3">
+                                <p class="p-label clr-silver">Total Failure</p><br>
+                                <input type="text" id="tb-elevator-failure">
+                            </div>
+                            <div class="col-xs-5 pt-2">
+                                <select id="select-year-elevator-failure">
+                                    <option value="2017">2017</option>
+                                    <option value="2018" selected>2018</option>
+                                    <option value="2019">2019</option>
+                                </select>
+                                <br>
+                                <button id="button-save-elevator-failure" class="button-save-failure" type="button">Save</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-4 col-sm-6 pb-2">
+                    <div class="bg-white pb-2 pl-4 pr-4">
+                        <div class="row pt-2">
+                            <div class="col-xs-2">
+                                <div class="bg-green div-circle-smaller mt-3">
+                                    <div class="row">
+                                        <div class="col-md text-center pt-1">
+                                            <i class="fa fa-arrow-down" style="color: white;"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-10 pl-3">
+                                <p class="clr-silver f12 mt-3">Failure Rate</p>
+                                <p class="rate">90.77%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-4 col-sm-6 pb-2">
+                    <div class="bg-white pb-2 pr-4 pl-4">
+                        <div class="row pt-2">
+                            <div class="col-xs-2 d-flex justify-content-center">
+                                <div class="bg-green div-circle-smaller mt-3">
+                                    <div class="row">
+                                        <div class="col-md text-center pt-1">
+                                            <i class="fa fa-arrow-down" style="color: white;"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-10 pl-3 pt-3">
+                                <p class="clr-silver f12">Annual Escalation Increase/Decrease</p>
+                                <p class="rate">90.77%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-4">
+                    <div class="bg-white">
+                        <div class="text-center pt-3 pb-3">
+                            <p class="clr-silver f12">Elevator DownTime</p>
+                            <p class="p-connect">N/A Connect IOT Device</p>
+                            <button id="button-upgrade-elevator" type="button">Upgrade</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="div-download-report">
+            <div class="col-12 d-flex justify-content-end">
+                <button class="button-reports" type="button">Download Condolytics Report</button>
+            </div>
+        </div>
+        <div class="row mt-3" id="div-elevator-spend-insights">
+            <div class="col-xl-8 pt-2">
+                <div class="bg-white pt-4 pr-3 pl-3 pb-4">
+                    <h6>Total Elevator Spend Insights</h6>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="chart-elevator-spend" style="height: 300px;" class="text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 pt-2">
+                <div class="bg-white pt-2 pl-3 pb-2">
+                    <div class="row">
+                        <div class="col-xs-2 pl-2">
+                            <div class="bg-green div-circle-small mt-3">
+                                <div class="row pt-1">
+
+                                    <div class="col-12 text-center pt-1">
+                                        <i class="fa fa-arrow-down fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 pl-2 pr-2">
+                            <p class="clr-silver f12 mt-3">Annual Escalation Increase/Decrease</p>
+                            <p class="rate pt-1">30%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2 pt-2 pb-3">
+                    <div class="col-12">
+                        <div class="bg-white pt-2 pb-5 pr-4 pl-3">
+                            <div class="pt-2 pl-3">
+                                <h6>Maintenance Costs</h6>
+                                <hr>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-xl-7 pt-2 pb-2 d-flex justify-content-center">
+                                    <div class="bg-green div-circle text-center">
+                                        <div class="row pt-1">
+                                            <div class="col-12 pt-3 text-center">
+                                                <i class="fa fa-arrow-down fa-5x" style="color: white;"></i>
+                                                <p class="p-arrow mt-2">
+                                                    $2,012
+                                                </p>
+                                                <p class="pt-4 f12 text-center text-wrap clr-silver">
+                                                    Compared to
+                                                    Previous Year
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 mt-5 text-center">
+                                    <select id="select-year-elevator-cost" class="select-year-maintenance">
+                                        <option value="2017">2017</option>
+                                        <option value="2018" selected>2018</option>
+                                        <option value="2019">2019</option>
+                                    </select>
+                                    <input id="tb-elevator-cost" type="text" name="cost" class="textbox-cost mt-1" placeholder="Cost">
+                                    <button id="button-save-elevator-cost" class="button-save-cost mt-1" type="button">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 d-flex justify-content-end">
+                <button class="button-reports" type="button">Condolytics Suggestions Report</button>
+            </div>
+        </div>
+        <hr>
+        <div id="div-plumbing-insights">
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <p class="headings clr-silver">Plumbing Insights</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-8 pt-2">
+                    <div class="bg-white pt-3 pr-3 pl-3 pb-2">
+                        <h6>Drain Stack Clogs Spent</h6>
+                        <hr>
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <div id="chart-plumber-spend" style="height: 300px;" class="text-center">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 pt-2">
+                    <div class="bg-white pt-2 pl-3 pb-4">
+                        <div class="row">
+                            <div class="col-xs-2 pl-2">
+                                <div class="bg-red div-circle-small mt-3">
+                                    <div class="row pt-1">
+
+                                        <div class="col-md text-center pt-1">
+                                            <i class="fa fa-arrow-up fa-2x" style="color: white;"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-10 pl-2 pr-5">
+                                <p class="clr-silver f12 mt-3">Annual Escalation Increase/Decrease</p>
+                                <p class="rate pt-1">153%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2 pt-2 pb-3">
+                        <div class="col-12">
+                            <div class="bg-white pt-2 pb-5 pr-4 pl-3">
+                                <h6>Maintenance Costs</h6>
+                                <hr>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-xl-7 col-sm-12 pt-2 pb-2 d-flex justify-content-center">
+                                        <div class="bg-red div-circle text-center">
+                                            <div class="row pt-1">
+                                                <div class="col-12 pt-3 text-center">
+                                                    <i class="fa fa-arrow-up fa-5x" style="color: white;"></i>
+                                                    <p class="p-arrow mt-2">
+                                                        $3,106
+                                                    </p>
+                                                    <p class="pt-4 f12 text-center text-wrap clr-silver">
+                                                        Compared to
+                                                        Previous Year
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-5 mt-5 text-center">
+                                        <select id="select-year-plumbing" class="select-year-maintenance">
+                                            <option value="2017">2017</option>
+                                            <option value="2018" selected>2018</option>
+                                            <option value="2019">2019</option>
+                                        </select>
+                                        <input id="tb-plumbing-cost" type="text" name="cost" class="textbox-cost mt-1" placeholder="Cost">
+                                        <button id="button-save-plumbing-cost" class="button-save-cost mt-1" type="button">Save</button>
+                                        <button id="button-save-plumbing-cost" class="button-save-cost mt-1" type="button">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 d-flex justify-content-end">
+                <button class="button-reports" type="button">Condolytics Suggestions Report</button>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div>
+                    <p class="headings clr-silver">Operational Plumbing Insights</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8 pt-2">
+                <div class="bg-white pt-2 pr-3 pl-3 pb-2">
+                    <hr>
+                    <div class="row mb-5">
+                        <div class="col-md-12 pt-2">
+                            <div id="chart-plumber-operational" style="height: 300px;" class="text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 pt-2">
+                <div class="bg-white pt-2 pl-3 pb-4">
+                    <div class="row">
+                        <div class="col-xs-2 pl-2">
+                            <div class="bg-red div-circle-small mt-3">
+                                <div class="row pt-1">
+
+                                    <div class="col-md text-center pt-1">
+                                        <i class="fa fa-arrow-up fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 pl-2 pr-5">
+                            <p class="clr-silver f12 mt-3">Annual Escalation Increase/Decrease</p>
+                            <p class="rate pt-1">16%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2 pt-2 pb-3">
+                    <div class="col-12">
+                        <div class="bg-white pt-2 pb-5 pr-4 pl-3">
+                            <h6>Maintenance Costs</h6>
+                            <hr>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-xl-7 col-sm-12 pt-2 pb-2 d-flex justify-content-center">
+                                    <div class="bg-red div-circle text-center">
+                                        <div class="row pt-1">
+                                            <div class="col-12 pt-3 text-center">
+                                                <i class="fa fa-arrow-up fa-5x" style="color: white;"></i>
+                                                <p class="p-arrow mt-2">
+                                                    $2,798,278,27
+                                                </p>
+                                                <p class="pt-4 f12 text-center text-wrap clr-silver">
+                                                    Compared to
+                                                    Previous Year
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 mt-5 text-center">
+                                    <select id="select-year-operational-plumbing" class="select-year-maintenance">
+                                        <option value="2017">2017</option>
+                                        <option value="2018" selected>2018</option>
+                                        <option value="2019">2019</option>
+                                    </select>
+                                    <input id="tb-operational-plumbing-cost" type="text" name="cost" class="textbox-cost mt-1" placeholder="Cost">
+                                    <button id="button-save-operational-plumbing" class="button-save-cost mt-1" type="button">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 d-flex justify-content-end">
+                <button class="button-reports" type="button">Condolytics Suggestions Report</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <p class="headings clr-silver">Boilers</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mt-3">
+                <div class="bg-white pl-3 pt-3 pr-3">
+                    <h4 class="clr-silver">Boiler A</h4>
+                    <hr>
+                    <div class="row pb-5">
+                        <div class="col-md text-center pt-5">
+                            <img src="Content/Images/riskometer.png" class="img-fluid">
+                        </div>
+                        <div class="col-md text-center">
+                            <img src="Content/Images/boiler.png" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="bg-white pl-3 pt-3 pr-3">
+                    <h4 class="clr-silver">Boiler B</h4>
+                    <hr>
+                    <div class="row pb-5">
+                        <div class="col-md text-center">
+                            <img src="Content/Images/boiler.png" class="img-fluid">
+                        </div>
+                        <div class="col-md text-center pt-5">
+                            <img src="Content/Images/riskometer.png" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3 pb-2">
+            <div class="col-lg-8">
+                <div class="bg-white mb-3 pt-3 pl-3 pr-3">
+                    <h6>Boiler Failure Trends Reported</h6>
+                    <hr>
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <div id="chart-boiler-failure" class="text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="bg-white pt-3 pb-5 pl-3 pr-3">
+                    <h6>Annual Failure Rate Increase/Decrease</h6>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="bg-red div-circle text-center">
+                                <div class="row pt-3">
+                                    <div class="col-12 text-center">
+                                        <i class="fa fa-arrow-up fa-5x" style="color: white;"></i>
+                                        <p class="p-arrow mt-1">
+                                            825.69%
+                                        </p>
+                                        <p class="pt-4 f12 text-center text-wrap clr-silver">
+                                            Compared to Previous
+                                            Year
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="div-boiler-failure-management">
+            <div class="col-xl-4 pb-2 ">
+                <div class="bg-white pb-3 pt-3 pr-4 pl-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-xs-4 pt-2 pl-3 d-flex justify-content-center">
+                            <div class="bg-red div-circle-small">
+                                <div class="row">
+                                    <div class="col-12 text-center pt-2">
+                                        <i class="fa fa-arrow-up fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 pt-2 pl-3 text-center">
+                            <p class="p-label clr-silver">Total Failure</p><br>
+                            <input type="text" id="tb-boiler-failure">
+                        </div>
+                        <div class="col-xs-4 pt-2 pl-3 text-center">
+                            <select id="select-year-boiler-failure">
+                                <option value="2017">2017</option>
+                                <option value="2018" selected>2018</option>
+                                <option value="2019">2019</option>
+                            </select>
+                            <br>
+                            <button id="button-save-boiler-failure" class="button-save-failure" type="button">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 pb-2">
+                <div class="bg-white pl-4 pb-2">
+                    <div class="row pt-2">
+                        <div class="col-xs-2 pl-2">
+                            <div class="bg-red div-circle-small mt-3">
+                                <div class="row">
+                                    <div class="col-12 text-center pt-2">
+                                        <i class="fa fa-arrow-up fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 pl-3">
+                            <p class="clr-silver f12 mt-3">Failure Rate</p>
+                            <p class="rate">825.69%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 pb-2">
+                <div class="bg-white pl-4 pb-2">
+                    <div class="row pt-2">
+                        <div class="col-xs-2 pl-2">
+                            <div class="bg-red div-circle-small mt-3">
+                                <div class="row">
+                                    <div class="col-md text-center pt-2">
+                                        <i class="fa fa-arrow-up fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 pl-3 pr-2">
+                            <p class="clr-silver f12 mt-3">Annual Escalation Increase/Decrease</p>
+                            <p class="rate">825.69%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-md-4 pt-2">
+                <div class="bg-white pt-2 pl-2 pr-2 pb-4">
+                    <div class="text-center">
+                        <p class="clr-silver f12 mt-3">Boiler Efficiency</p>
+                        <p class="p-connect">N/A Connect IOT Device</p>
+                        <button class="button-upgrade" type="button">Upgrade</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 pt-2">
+                <div class="bg-white pt-2 pl-2 pr-2 pb-4">
+                    <div class="text-center">
+                        <p class="clr-silver f12 mt-3">Detailed Features</p>
+                        <p class="p-connect">N/A Connect IOT Device</p>
+                        <button class="button-upgrade" type="button">Upgrade</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 pt-2">
+                <div class="bg-white pt-2 pl-2 pr-2 pb-4">
+                    <div class="text-center">
+                        <p class="clr-silver f12 mt-3">Energy Efficiency</p>
+                        <p class="p-connect">N/A Connect IOT Device</p>
+                        <button class="button-upgrade" type="button">Upgrade</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-xl-8 pt-2">
+                <div class="bg-white pt-3 pr-3 pl-3 pb-3">
+                    <h6>Boiler Maintenance Costs</h6>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 pt-2">
+                            <div id="chart-boiler-cost" class="text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 pt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="bg-white pt-3 pb-5 pr-4 pl-3">
+                            <h6>Maintenance Costs</h6>
+                            <hr>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-xl-7 col-sm-12 pt-2 pb-2 d-flex justify-content-center">
+                                    <div class="bg-green div-circle text-center">
+                                        <div class="row pt-1">
+                                            <div class="col-12 pt-3 text-center">
+                                                <i class="fa fa-arrow-down fa-5x" style="color: white;"></i>
+                                                <p class="p-arrow mt-2">
+                                                    $2
+                                                </p>
+                                                <p class="pt-4 f12 text-center text-wrap clr-silver">
+                                                    Compared to
+                                                    Previous Year
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 mt-5 text-center">
+                                    <select id="select-year-boiler-cost" class="select-year-maintenance">
+                                        <option value="2017">2017</option>
+                                        <option value="2018" selected>2018</option>
+                                        <option value="2019">2019</option>
+                                    </select>
+                                    <input id="tb-boiler-cost" type="text" name="cost" class="textbox-cost mt-1" placeholder="Cost">
+                                    <button id="button-save-boiler-cost" class="button-save-cost mt-1" type="button">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-3">
+            <div class="col-12">
+                <div>
+                    <p class="headings clr-silver">Chillers</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mt-3">
+                <div class="bg-white pl-3 pt-3 pr-3">
+                    <h4 class="clr-silver">Chiller A</h4>
+                    <hr>
+                    <div class="row pb-5">
+                        <div class="col-md text-center pt-5">
+                            <img src="Content/Images/riskometer.png" class="img-fluid">
+                        </div>
+                        <div class="col-md text-center">
+                            <img src="Content/Images/chiller.png" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="bg-white pl-3 pt-3 pr-3">
+                    <h4 class="clr-silver">Chiller B</h4>
+                    <hr>
+                    <div class="row pb-5">
+                        <div class="col-md text-center">
+                            <img src="Content/Images/chiller.png" class="img-fluid">
+                        </div>
+                        <div class="col-md text-center pt-5">
+                            <img src="Content/Images/riskometer.png" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3 pb-2">
+            <div class="col-lg-8">
+                <div class="bg-white mb-3 pt-3 pl-3 pr-3">
+                    <h6>Chiller Failure Trends Reported</h6>
+                    <hr>
+                    <div class="row pt-2">
+                        <div class="col-md-12">
+                            <div id="chart-chiller-failure" class="text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="bg-white pt-3 pb-5 pl-3 pr-3">
+                    <h6>Annual Failure Rate Increase/Decrease</h6>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <div class="bg-green div-circle text-center">
+                                <div class="row">
+                                    <div class="col-md pt-4 text-center">
+                                        <i class="fa fa-arrow-down fa-5x" style="color: white;"></i>
+                                        <p class="p-arrow mt-1">
+                                            0.05%
+                                        </p>
+                                        <p class="pt-4 f12 text-center text-wrap clr-silver">
+                                            Compared to Previous
+                                            Year
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="div-chiller-failure-management">
+            <div class="col-xl-4 pb-2">
+                <div class="bg-white pb-3 pt-3 pr-3 pl-3">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-xs-4 pt-2 pl-3 d-flex justify-content-center">
+                            <div class="bg-green div-circle-small">
+                                <div class="row">
+                                    <div class="col-12 text-center pt-2">
+                                        <i class="fa fa-arrow-down fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 pt-2 pl-3 text-center">
+                            <p class="p-label clr-silver">Total Failure</p><br>
+                            <input type="text" id="tb-chiller-failure">
+                        </div>
+                        <div class="col-xs-4 pt-2 pl-3 text-center">
+                            <select id="select-year-chiller-failure">
+                                <option value="2017">2017</option>
+                                <option value="2018" selected>2018</option>
+                                <option value="2019">2019</option>
+                            </select>
+                            <br>
+                            <button id="button-save-chiller-failure" class="button-save-failure" type="button">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 pb-2">
+                <div class="bg-white pl-4 pb-2">
+                    <div class="row pt-2">
+                        <div class="col-xs-2 pl-2">
+                            <div class="bg-green div-circle-small mt-3">
+                                <div class="row">
+                                    <div class="col-12 text-center pt-2">
+                                        <i class="fa fa-arrow-down fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 pl-4">
+                            <p class="clr-silver f12 mt-3">Failure Rate</p>
+                            <p class="rate">0.05%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 pb-2">
+                <div class="bg-white pl-4 pb-2">
+                    <div class="row pt-2">
+                        <div class="col-xs-2 pl-2">
+                            <div class="bg-green div-circle-small mt-3">
+                                <div class="row">
+                                    <div class="col-12 text-center pt-2">
+                                        <i class="fa fa-arrow-down fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 pl-2 pr-2">
+                            <p class="clr-silver f12 mt-3">Annual Escalation Increase/Decrease</p>
+                            <p class="rate">0.05%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-md-4 pt-2">
+                <div class="bg-white pt-2 pl-2 pb-2 pr-2 pb-4">
+                    <div class="text-center">
+                        <p class="clr-silver f12 mt-3">Chiller Efficiency</p>
+                        <p class="p-connect">N/A Connect IOT Device</p>
+                        <button class="button-upgrade" type="button">Upgrade</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 pt-2">
+                <div class="bg-white pt-2 pl-2 pb-2 pr-2 pb-4">
+                    <div class="text-center">
+                        <p class="clr-silver f12 mt-3">Detailed Features</p>
+                        <p class="p-connect">N/A Connect IOT Device</p>
+                        <button class="button-upgrade" type="button">Upgrade</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 pt-2">
+                <div class="bg-white pt-2 pl-2 pb-2 pr-2 pb-4">
+                    <div class="text-center">
+                        <p class="clr-silver f12 mt-3">Energy Efficiency</p>
+                        <p class="p-connect">N/A Connect IOT Device</p>
+                        <button class="button-upgrade" type="button">Upgrade</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-xl-8 pt-2">
+                <div class="bg-white pt-3 pr-3 pl-3 pb-3">
+                    <h6>Chiller Maintenance Costs</h6>
+                    <hr>
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <div id="chart-chiller-cost" style="height: 300px;" class="text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 pt-2">
+                <div class="bg-white pt-2 pl-3 pb-4">
+                    <div class="row">
+                        <div class="col-xs-2 pl-2">
+                            <div class="bg-green div-circle-small mt-3">
+                                <div class="row pt-1">
+
+                                    <div class="col-md text-center pt-1">
+                                        <i class="fa fa-arrow-down fa-2x" style="color: white;"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-10 pl-2 pr-5">
+                            <p class="clr-silver f12 mt-3">Annual Escalation Increase/Decrease</p>
+                            <p class="rate pt-1">16%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2 pt-2 pb-3">
+                    <div class="col-12">
+                        <div class="bg-white pt-2 pb-5 pr-4 pl-3">
+                            <h6>Maintenance Costs</h6>
+                            <hr>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-xl-7 col-sm-12 pt-2 pb-2 d-flex justify-content-center">
+                                    <div class="bg-green div-circle text-center">
+                                        <div class="row pt-1">
+                                            <div class="col-12 pt-3 text-center">
+                                                <i class="fa fa-arrow-down fa-5x" style="color: white;"></i>
+                                                <p class="p-arrow mt-2">
+                                                    $1
+                                                </p>
+                                                <p class="pt-4 f12 text-center text-wrap clr-silver">
+                                                    Compared to
+                                                    Previous Year
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 mt-5 text-center">
+                                    <select id="select-year-chiller-cost" class="select-year-maintenance">
+                                        <option value="2017">2017</option>
+                                        <option value="2018" selected>2018</option>
+                                        <option value="2019">2019</option>
+                                    </select>
+                                    <input id="tb-chiller-cost" type="text" name="cost" class="textbox-cost mt-1" placeholder="Cost">
+                                    <button id="button-save-chiller-cost" class="button-save-cost mt-1" type="button">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 mb-5">
+            <div class="col-12 d-flex justify-content-end">
+                <div id="div-save-insights" class="bg-white d-flex justify-content-center pt-2 pb-2">
+                    <button id="button-save-insights" type="button">Save Insights</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="Scripts/script.js"></script>
+</body>
+
+</html>
