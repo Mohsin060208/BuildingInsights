@@ -80,6 +80,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\boiler.png" />
+    <Content Include="Content\Images\chiller.png" />
+    <Content Include="Content\Images\elevator.png" />
+    <Content Include="Content\Images\riskometer.png" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
     <Content Include="insights.html" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -89,7 +94,6 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MechanicsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\YearlyRecordBookController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -120,7 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

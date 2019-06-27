@@ -407,6 +407,7 @@ function drawChartElevatorFailure() {
             'Content-Type': 'application/json'
         },
         success: function (r) {
+            document.getElementById("chart-elevator-failure").innerHTML = "";
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-elevator-failure"));
             var view = new google.visualization.DataView(data);
@@ -440,6 +441,7 @@ function drawChartElevatorSpend() {
             'Content-Type': 'application/json'
         },
         success: function (r) {
+            document.getElementById("chart-elevator-spend").innerHTML = "";
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-elevator-spend"));
             var view = new google.visualization.DataView(data);
@@ -471,6 +473,7 @@ function drawChartPlumberSpend() {
             'Content-Type': 'application/json'
         },
         success: function (r) {
+            document.getElementById("chart-plumber-spend").innerHTML = "";
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-plumber-spend"));
             var view = new google.visualization.DataView(data);
@@ -502,6 +505,7 @@ function drawChartPlumberOperational() {
             'Content-Type': 'application/json'
         },
         success: function (r) {
+            document.getElementById("chart-plumber-operational").innerHTML = "";
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-plumber-operational"));
             var view = new google.visualization.DataView(data);
@@ -533,6 +537,7 @@ function drawChartBoilerFailure() {
             'Content-Type': 'application/json'
         },
         success: function (r) {
+            document.getElementById("chart-boiler-failure").innerHTML;
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-boiler-failure"));
             var view = new google.visualization.DataView(data);
@@ -564,6 +569,7 @@ function drawChartBoilerCost() {
             'Content-Type': 'application/json'
         },
         success: function (r) {
+            document.getElementById("chart-boiler-cost").innerHTML = "";
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-boiler-cost"));
             var view = new google.visualization.DataView(data);
@@ -595,6 +601,7 @@ function drawChartChillerFailure() {
             'Content-Type': 'application/json'
         },
         success: function (r) {
+            document.getElementById("chart-chiller-failure").innerHTML = "";
             var data = google.visualization.arrayToDataTable(r);
             var chart = new google.visualization.ColumnChart(document.getElementById("chart-chiller-failure"));
             var view = new google.visualization.DataView(data);
@@ -626,6 +633,7 @@ function drawChartChillerFailure() {
                 'Content-Type': 'application/json'
             },
             success: function (r) {
+                document.getElementById("chart-chiller-cost").innerHTML = "";
                 var data = google.visualization.arrayToDataTable(r);
                 var chart = new google.visualization.ColumnChart(document.getElementById("chart-chiller-cost"));
                 var view = new google.visualization.DataView(data);
