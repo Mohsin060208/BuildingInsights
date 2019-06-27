@@ -62,12 +62,14 @@ function SaveTotalCost(model) {
         success: function (r) {
            
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "/api/YearlyRecordBook/GetTotalCost",
-                dataType: "json",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 data: {
-                    Year: 2018,
-                    BuildingId: 1
+                    "Year": 2018,
+                    "BuildingId": 1
                 },
                 success: function (r) {
                     document.getElementById(model.P_TotalCost).innerText = ("$" + r.TotalCost);
@@ -89,6 +91,27 @@ function SaveTotalCost(model) {
         }
     });
 }
+function SaveTotalSaving(model) {
+    $.ajax({
+        type: "POST",
+        url: "/api/YearlyRecordBook/InsertUpdateTotalSaving",
+        data: {
+            Year: model.Year,
+            TotalSaving: model.TotalSaving,
+            BuildingId: 1
+        },
+        success: function (r) {
+            document.getElementById(model.P_TotalSaving).innerText = ("$" + r.TotalSaving);
+            document.getElementById(model.Tb_TotalSaving).innerText = "";
+        },
+        failure: function (r) {
+            alert(r.d);
+        },
+        error: function (r) {
+            alert(r.d);
+        }
+    });
+}
 $('#button-total-cost-save').click(function () {
     var model = {
         Year: $("#select-year-cost").val(),
@@ -99,26 +122,15 @@ $('#button-total-cost-save').click(function () {
     SaveTotalCost(model)
 })
 
-    $('#button-total-savings-save').click(function () {
-        $.ajax({
-            type: "POST",
-            url: "/api/YearlyRecordBook/InsertUpdateTotalSaving",
-            data: {
-                Year: $("#select-year-saving").val(),
-                TotalSaving: $("#tb-total-savings").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-total-savings").val("");
-            },
-            failure: function (r) {
-                alert(r.d);
-            },
-            error: function (r) {
-                alert(r.d);
-            }
-        });
-    })
+$('#button-total-savings-save').click(function () {
+    var model = {
+        Year: $("#select-year-saving").val(),
+        TotalSaving: $("#tb-total-savings").val(),
+        P_TotalSaving: "p-total-saving",
+        Tb_TotalSaving: "tb-total-savings"
+    }
+    SaveTotalSaving(model)
+})
     $('#button-save-elevator-failure').click(function () {
         $.ajax({
             type: "POST",
