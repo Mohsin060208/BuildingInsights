@@ -60,7 +60,12 @@ $('#button-save-chiller-failure').click(function () {
 $('#button-save-chiller-cost').click(function () {
     SaveChillerCost();
 })
-
+$("#select-year-saving").change(function () {
+    GetTotalSaving();
+});
+$("#select-year-cost").change(function () {
+    GetTotalCost();
+});
 function SaveTotalCost() {
     var tb = document.getElementById("tb-total-cost").value;
     if (tb !== "") { 
@@ -119,465 +124,144 @@ function SaveElevatorFailure() {
     }
     SaveFailures(model);
 }
-function SaveFailures(model) {
-    var tb = document.getElementById(model.Tb).value;
-    if (tb !== "") {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsFailure",
-            data: {
-                Type: model.Type,
-                Year: model.Year,
-                Failure: model.Failure,
-                BuildingId: 1
-            },
-            success: function (r) {
-                $(model.Tb).val("");
-                model.Function();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
-}
-function SaveElevatorCost() {
-    var tb = document.getElementById("tb-elevator-cost").value;
-    if (tb !== "") {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsCost",
-            data: {
-                Type: "Elevator",
-                Year: $("#select-year-elevator-cost").val(),
-                Cost: $("#tb-elevator-cost").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-elevator-cost").val("");
-                drawChartElevatorSpend();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
-}
-function SavePlumbingCost() {
-    var tb = document.getElementById("tb-plumbing-cost").value;
-    if (tb !== "") {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsCost",
-            data: {
-                Type: "Plumbing",
-                Year: $("#select-year-plumbing").val(),
-                Cost: $("#tb-plumbing-cost").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-plumbing-cost").val("");
-                drawChartPlumberSpend();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
-}
-function SaveOperationalPlumbingCost() {
-    var tb = document.getElementById("tb-operational-plumbing-cost").value;
-    if (tb !== "") {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsCost",
-            data: {
-                Type: "Operational Plumbing",
-                Year: $("#select-year-operational-plumbing").val(),
-                Cost: $("#tb-operational-plumbing-cost").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-operational-plumbing-cost").val("");
-                drawChartPlumberOperational();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
-}
 function SaveBoilerFailure() {
-    var tb = document.getElementById("tb-boiler-failure").value;
-    if (tb !== "") {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsFailure",
-            data: {
-                Type: "Boiler",
-                Year: $("#select-year-boiler-failure").val(),
-                Failure: $("#tb-boiler-failure").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-boiler-failure").val("");
-                drawChartBoilerFailure();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
+    var model = {
+        Tb: "tb-boiler-failure",
+        Type: "Boiler",
+        Year: $("#select-year-boiler-failure").val(),
+        Failure: $("#tb-boiler-failure").val(),
+        Function: drawChartBoilerFailure
     }
-}
-function SaveBoilerCost() {
-    var tb = document.getElementById("tb-boiler-cost").value;
-    if (tb !== "") {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsCost",
-            data: {
-                Type: "Boiler",
-                Year: $("#select-year-boiler-cost").val(),
-                Cost: $("#tb-boiler-cost").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-boiler-cost").val("");
-                drawChartBoilerCost();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
+    SaveFailures(model);
 }
 function SaveChillerFailure() {
-    var tb = document.getElementById("tb-chiller-failure").value;
-    if (tb !== "") {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsFailure",
-            data: {
-                Type: "Chiller",
-                Year: $("#select-year-chiller-failure").val(),
-                Failure: $("#tb-chiller-failure").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-chiller-failure").val("");
-                drawChartChillerFailure();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
+    var model = {
+        Tb: "tb-chiller-failure",
+        Type: "Chiller",
+        Year: $("#select-year-chiller-failure").val(),
+        Failure: $("#tb-chiller-failure").val(),
+        Function: drawChartChillerFailure
     }
+    SaveFailures(model);
 }
-function SaveChillerCost() {  
-    var tb = document.getElementById("tb-chiller-cost").value;
-    if (tb !== "") {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsCost",
-            data: {
-                Type: "Chiller",
-                Year: $("#select-year-chiller-cost").val(),
-                Cost: $("#tb-chiller-cost").val(),
-                BuildingId: 1
-            },
-            success: function (r) {
-                $("#tb-chiller-cost").val("");
-                drawChartChillerCost();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
+function SaveElevatorCost() {
+    var model = {
+        Tb: "tb-elevator-cost",
+        Type: "Elevator",
+        Year: $("#select-year-elevator-cost").val(),
+        Cost: $("#tb-elevator-cost").val(),
+        Function: drawChartElevatorSpend
     }
+    SaveCosts(model);
+}
+
+function SavePlumbingCost() {
+    var model = {
+        Tb: "tb-plumbing-cost",
+        Type: "Plumbing",
+        Year: $("#select-year-plumbing").val(),
+        Cost: $("#tb-plumbing-cost").val(),
+        Function: drawChartPlumberSpend
+    }
+    SaveCosts(model);
+}
+function SaveOperationalPlumbingCost() {
+    var model = {
+        Tb: "tb-operational-plumbing-cost",
+        Type: "Operational Plumbing",
+        Year: $("#select-year-operational-plumbing").val(),
+        Cost: $("#tb-operational-plumbing-cost").val(),
+        Function: drawChartPlumberOperational
+    }
+    SaveCosts(model);
+}
+
+function SaveBoilerCost() {
+    var model = {
+        Tb: "tb-boiler-cost",
+        Type: "Boiler",
+        Year: $("#select-year-boiler-cost").val(),
+        Cost: $("#tb-boiler-cost").val(),
+        Function: drawChartBoilerCost
+    }
+    SaveCosts(model);
+}
+
+function SaveChillerCost() {  
+    var model = {
+        Tb: "tb-chiller-cost",
+        Type: "Chiller",
+        Year: $("#select-year-chiller-cost").val(),
+        Cost: $("#tb-chiller-cost").val(),
+        Function: drawChartChillerCost
+    }
+    SaveCosts(model);
 }
 
 
 
 function drawChartElevatorFailure() {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetFailureChartData",
-        data: {"Type": "Elevator"},
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById("chart-elevator-failure").innerHTML = "";
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById("chart-elevator-failure"));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
-
-
+    var model = {
+        Type: "Elevator",
+        Div: "chart-elevator-failure"
+    }
+    GetFailures(model);
 }
 
 function drawChartElevatorSpend() {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetCostChartData",
-        data: { "Type": "Elevator" },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById("chart-elevator-spend").innerHTML = "";
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById("chart-elevator-spend"));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
+    var model = {
+        Type: "Elevator",
+        Div: "chart-elevator-spend"
+    }
+    GetCosts(model);
 }
 
 function drawChartPlumberSpend() {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetCostChartData",
-        data: { "Type": "Plumbing" },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById("chart-plumber-spend").innerHTML = "";
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById("chart-plumber-spend"));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
+    var model = {
+        Type: "Plumbing",
+        Div: "chart-plumber-spend"
+    }
+    GetCosts(model);
 }
 
 function drawChartPlumberOperational() {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetCostChartData",
-        data: { "Type": "Operational Plumbing" },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById("chart-plumber-operational").innerHTML = "";
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById("chart-plumber-operational"));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
+    var model = {
+        Type: "Operational Plumbing",
+        Div: "chart-plumber-operational"
+    }
+    GetCosts(model);
 }
 
 function drawChartBoilerFailure() {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetFailureChartData",
-        data: { "Type": "Boiler" },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById("chart-boiler-failure").innerHTML;
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById("chart-boiler-failure"));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
+    var model = {
+        Type: "Boiler",
+        Div: "chart-boiler-failure"
+    }
+    GetFailures(model);
 }
 
 function drawChartBoilerCost() {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetCostChartData",
-        data: { Type: "Boiler" },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById("chart-boiler-cost").innerHTML = "";
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById("chart-boiler-cost"));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
+    var model = {
+        Type: "Boiler",
+        Div: "chart-boiler-cost"
+    }
+    GetCosts(model);
 }
 
 function drawChartChillerFailure() {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetFailureChartData",
-        data: { "Type": "Chiller" },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById("chart-chiller-failure").innerHTML = "";
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById("chart-chiller-failure"));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
+    var model = {
+        Type: "Chiller",
+        Div: "chart-chiller-failure"
+    }
+    GetFailures(model);
 }
 
 function drawChartChillerCost() {
-        var options = {
-            bar: { groupWidth: "100%" },
-            legend: { position: "none" },
-        };
-        $.ajax({
-            type: "GET",
-            url: "/api/mechanics/GetCostChartData",
-            data: { Type: "Chiller" },
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            success: function (r) {
-                document.getElementById("chart-chiller-cost").innerHTML = "";
-                var data = google.visualization.arrayToDataTable(r);
-                var chart = new google.visualization.ColumnChart(document.getElementById("chart-chiller-cost"));
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-                $(window).resize(function () {
-                    var view = new google.visualization.DataView(data);
-                    chart.draw(view, options);
-                })
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
+    var model = {
+        Type: "Chiller",
+        Div: "chart-chiller-cost"
+    }
+    GetCosts(model);
 }
 function GetTotalCost() {
     $.ajax({
@@ -623,9 +307,115 @@ function GetTotalSaving() {
         }
     });
 }
-$("#select-year-saving").change(function () {
-    GetTotalSaving();
-});
-$("#select-year-cost").change(function () {
-    GetTotalCost();
-});
+function SaveFailures(model) {
+    var tb = document.getElementById(model.Tb).value;
+    if (tb !== "") {
+        $.ajax({
+            type: "POST",
+            url: "/api/mechanics/InsertUpdateMechanicsFailure",
+            data: {
+                Type: model.Type,
+                Year: model.Year,
+                Failure: model.Failure,
+                BuildingId: 1
+            },
+            success: function (r) {
+                document.getElementById(model.Tb).value = "";
+                model.Function();
+            },
+            failure: function (r) {
+                alert(r);
+            },
+            error: function (r) {
+                alert(r);
+            }
+        });
+    }
+}
+function SaveCosts(model) {
+    var tb = document.getElementById(model.Tb).value;
+    if (tb !== "") {
+        $.ajax({
+            type: "POST",
+            url: "/api/mechanics/InsertUpdateMechanicsCost",
+            data: {
+                Type: model.Type,
+                Year: model.Year,
+                Cost: model.Cost,
+                BuildingId: 1
+            },
+            success: function (r) {
+                document.getElementById(model.Tb).value = "";
+                model.Function();
+            },
+            failure: function (r) {
+                alert(r);
+            },
+            error: function (r) {
+                alert(r);
+            }
+        });
+    }
+}
+function GetFailures(model) {
+    var options = {
+        bar: { groupWidth: "100%" },
+        legend: { position: "none" },
+    };
+    $.ajax({
+        type: "GET",
+        url: "/api/mechanics/GetFailureChartData",
+        data: { "Type": model.Type },
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        success: function (r) {
+            document.getElementById(model.Div).innerHTML = "";
+            var data = google.visualization.arrayToDataTable(r);
+            var chart = new google.visualization.ColumnChart(document.getElementById(model.Div));
+            var view = new google.visualization.DataView(data);
+            chart.draw(view, options);
+            $(window).resize(function () {
+                var view = new google.visualization.DataView(data);
+                chart.draw(view, options);
+            })
+        },
+        failure: function (r) {
+            alert(r);
+        },
+        error: function (r) {
+            alert(r);
+        }
+    });
+}
+function GetCosts(model) {
+    var options = {
+        bar: { groupWidth: "100%" },
+        legend: { position: "none" },
+    };
+    $.ajax({
+        type: "GET",
+        url: "/api/mechanics/GetCostChartData",
+        data: { "Type": model.Type },
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        success: function (r) {
+            document.getElementById(model.Div).innerHTML = "";
+            var data = google.visualization.arrayToDataTable(r);
+            var chart = new google.visualization.ColumnChart(document.getElementById(model.Div));
+            var view = new google.visualization.DataView(data);
+            chart.draw(view, options);
+            $(window).resize(function () {
+                var view = new google.visualization.DataView(data);
+                chart.draw(view, options);
+            })
+        },
+        failure: function (r) {
+            alert(r);
+        },
+        error: function (r) {
+            alert(r);
+        }
+    });
+}
