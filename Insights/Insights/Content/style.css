@@ -193,3 +193,8 @@ select {
 .select-year-maintenance {
     width: 120px;
 }
+
+.error{
+    color: red;
+    font-size: 10px;
+}

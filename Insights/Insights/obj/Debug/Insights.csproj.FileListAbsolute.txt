@@ -57,7 +57,6 @@ D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\bin\System.Net
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\bin\System.Web.Http.xml
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\bin\System.Web.Http.WebHost.xml
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.csprojAssemblyReference.cache
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.csproj.CoreCompileInputs.cache
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.csproj.CopyComplete
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.dll

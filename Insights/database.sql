@@ -11,7 +11,7 @@ Target Server Type    : SQL Server
 Target Server Version : 110000
 File Encoding         : 65001
 
-Date: 2019-06-28 14:11:12
+Date: 2019-06-28 14:36:15
 */
 
 
@@ -69,13 +69,13 @@ GO
 -- ----------------------------
 SET IDENTITY_INSERT [dbo].[Mechanics] ON
 GO
-INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1002', N'1', N'Elevator', N'6200', N'65', N'2017', N'1', N'1900-01-01 00:00:00.000', N'2019-06-28 00:00:00.000')
+INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1002', N'1', N'Elevator', N'6100', N'65', N'2017', N'1', N'1900-01-01 00:00:00.000', N'2019-06-28 00:00:00.000')
 GO
 GO
-INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1003', N'1', N'Elevator', N'5000', N'5', N'2018', N'1', N'2019-06-26 00:00:00.000', N'2019-06-28 00:00:00.000')
+INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1003', N'1', N'Elevator', N'5300', N'5', N'2018', N'1', N'2019-06-26 00:00:00.000', N'2019-06-28 00:00:00.000')
 GO
 GO
-INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1005', N'1', N'Elevator', N'5500', N'60', N'2019', N'1', N'2019-06-26 00:00:00.000', N'2019-06-28 00:00:00.000')
+INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1005', N'1', N'Elevator', N'5600', N'60', N'2019', N'1', N'2019-06-26 00:00:00.000', N'2019-06-28 00:00:00.000')
 GO
 GO
 INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1007', N'1', N'Plumbing', N'2000', null, N'2017', N'1', N'2019-06-26 00:00:00.000', N'2019-06-28 00:00:00.000')
@@ -90,10 +90,10 @@ GO
 INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1010', N'1', N'Operational Plumbing', N'17000000000', null, N'2017', N'1', N'2019-06-26 00:00:00.000', N'1900-01-01 00:00:00.000')
 GO
 GO
-INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1011', N'1', N'Operational Plumbing', N'5200', null, N'2018', N'1', N'2019-06-26 00:00:00.000', N'2019-06-27 00:00:00.000')
+INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1011', N'1', N'Operational Plumbing', N'19000000000', null, N'2018', N'1', N'2019-06-26 00:00:00.000', N'2019-06-28 00:00:00.000')
 GO
 GO
-INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1012', N'1', N'Operational Plumbing', N'5000', null, N'2019', N'1', N'2019-06-26 00:00:00.000', N'2019-06-27 00:00:00.000')
+INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1012', N'1', N'Operational Plumbing', N'5000000000', null, N'2019', N'1', N'2019-06-26 00:00:00.000', N'2019-06-28 00:00:00.000')
 GO
 GO
 INSERT INTO [dbo].[Mechanics] ([Id], [BuildingId], [Type], [Cost], [Failure], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1013', N'1', N'Boiler', N'3550', N'3999', N'2018', N'1', N'2019-06-26 00:00:00.000', N'2019-06-28 00:00:00.000')
@@ -146,10 +146,10 @@ GO
 INSERT INTO [dbo].[YearlyRecordBook] ([Id], [BuildingId], [TotalCost], [TotalSaving], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'1', N'1', N'1280', N'123', N'2018', N'1', N'2019-06-27 11:52:57.000', N'2019-06-28 00:00:00.000')
 GO
 GO
-INSERT INTO [dbo].[YearlyRecordBook] ([Id], [BuildingId], [TotalCost], [TotalSaving], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'2', N'1', N'1500', N'3500', N'2017', N'1', N'2019-06-27 00:00:00.000', N'2019-06-27 00:00:00.000')
+INSERT INTO [dbo].[YearlyRecordBook] ([Id], [BuildingId], [TotalCost], [TotalSaving], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'2', N'1', N'1500', N'350', N'2017', N'1', N'2019-06-27 00:00:00.000', N'2019-06-28 00:00:00.000')
 GO
 GO
-INSERT INTO [dbo].[YearlyRecordBook] ([Id], [BuildingId], [TotalCost], [TotalSaving], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'9', N'1', null, N'350', N'2019', N'1', N'2019-06-27 00:00:00.000', N'2019-06-27 00:00:00.000')
+INSERT INTO [dbo].[YearlyRecordBook] ([Id], [BuildingId], [TotalCost], [TotalSaving], [Year], [IsActive], [CreatedOn], [UpdatedOn]) VALUES (N'9', N'1', N'2000', N'350', N'2019', N'1', N'2019-06-27 00:00:00.000', N'2019-06-28 00:00:00.000')
 GO
 GO
 SET IDENTITY_INSERT [dbo].[YearlyRecordBook] OFF

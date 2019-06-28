@@ -68,7 +68,9 @@ $("#select-year-cost").change(function () {
 });
 function SaveTotalCost() {
     var tb = document.getElementById("tb-total-cost").value;
-    if (tb !== "") { 
+    var p = "p-building-total-cost";
+    var valid = Validation(tb, p);
+    if (tb !== "" && valid == true) { 
         $.ajax({
             type: "POST",
             url: "/api/YearlyRecordBook/InsertUpdateTotalCost",
@@ -92,7 +94,9 @@ function SaveTotalCost() {
 }
 function SaveTotalSaving() {
     var tb = document.getElementById("tb-total-savings").value;
-    if (tb !== "") {
+    var p = "p-building-total-savings";
+    var valid = Validation(tb, p);
+    if (tb !== "" && valid == true) {
         $.ajax({
             type: "POST",
             url: "/api/YearlyRecordBook/InsertUpdateTotalSaving",
@@ -117,6 +121,7 @@ function SaveTotalSaving() {
 function SaveElevatorFailure() {
     var model = {
         Tb: "tb-elevator-failure",
+        P: "p-elevator-failure",
         Type: "Elevator",
         Year: $("#select-year-elevator-failure").val(),
         Failure: $("#tb-elevator-failure").val(),
@@ -127,6 +132,7 @@ function SaveElevatorFailure() {
 function SaveBoilerFailure() {
     var model = {
         Tb: "tb-boiler-failure",
+        P: "p-boiler-failure",
         Type: "Boiler",
         Year: $("#select-year-boiler-failure").val(),
         Failure: $("#tb-boiler-failure").val(),
@@ -137,6 +143,7 @@ function SaveBoilerFailure() {
 function SaveChillerFailure() {
     var model = {
         Tb: "tb-chiller-failure",
+        P: "p-chiller-failure",
         Type: "Chiller",
         Year: $("#select-year-chiller-failure").val(),
         Failure: $("#tb-chiller-failure").val(),
@@ -147,6 +154,7 @@ function SaveChillerFailure() {
 function SaveElevatorCost() {
     var model = {
         Tb: "tb-elevator-cost",
+        P: "p-elevator-cost",
         Type: "Elevator",
         Year: $("#select-year-elevator-cost").val(),
         Cost: $("#tb-elevator-cost").val(),
@@ -158,6 +166,7 @@ function SaveElevatorCost() {
 function SavePlumbingCost() {
     var model = {
         Tb: "tb-plumbing-cost",
+        P: "p-plumbing-cost",
         Type: "Plumbing",
         Year: $("#select-year-plumbing").val(),
         Cost: $("#tb-plumbing-cost").val(),
@@ -168,6 +177,7 @@ function SavePlumbingCost() {
 function SaveOperationalPlumbingCost() {
     var model = {
         Tb: "tb-operational-plumbing-cost",
+        P: "p-operational-plumbing-cost",
         Type: "Operational Plumbing",
         Year: $("#select-year-operational-plumbing").val(),
         Cost: $("#tb-operational-plumbing-cost").val(),
@@ -179,6 +189,7 @@ function SaveOperationalPlumbingCost() {
 function SaveBoilerCost() {
     var model = {
         Tb: "tb-boiler-cost",
+        P: "p-boiler-cost",
         Type: "Boiler",
         Year: $("#select-year-boiler-cost").val(),
         Cost: $("#tb-boiler-cost").val(),
@@ -190,6 +201,7 @@ function SaveBoilerCost() {
 function SaveChillerCost() {  
     var model = {
         Tb: "tb-chiller-cost",
+        P: "p-chiller-cost",
         Type: "Chiller",
         Year: $("#select-year-chiller-cost").val(),
         Cost: $("#tb-chiller-cost").val(),
@@ -307,9 +319,21 @@ function GetTotalSaving() {
         }
     });
 }
+function Validation(tb, p) {    
+    for (var i = 0; i < tb.length; i++) {
+        var thisChar = parseInt(tb[i]);
+        if (isNaN(thisChar)) {
+            document.getElementById(p).className = "error";
+            return false;
+        }
+    }
+    document.getElementById(p).className = "d-none";
+    return true;
+}
 function SaveFailures(model) {
     var tb = document.getElementById(model.Tb).value;
-    if (tb !== "") {
+    var valid = Validation(tb, model.P);
+    if (tb !== "" && valid == true) {
         $.ajax({
             type: "POST",
             url: "/api/mechanics/InsertUpdateMechanicsFailure",
@@ -332,9 +356,11 @@ function SaveFailures(model) {
         });
     }
 }
+
 function SaveCosts(model) {
-    var tb = document.getElementById(model.Tb).value;
-    if (tb !== "") {
+    var tb = document.getElementById(model.Tb).value;    
+    var valid = Validation(tb,model.P);
+    if (tb !== null && valid == true) {
         $.ajax({
             type: "POST",
             url: "/api/mechanics/InsertUpdateMechanicsCost",
