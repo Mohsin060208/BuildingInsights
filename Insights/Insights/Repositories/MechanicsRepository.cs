@@ -100,19 +100,5 @@ namespace Repository
                 con.Close();
             }
         }
-        public void DeleteMechanics(int id)
-    {
-            using (SqlConnection con = new SqlConnection(conStr))
-            {
-                SqlCommand cmd = new SqlCommand("Delete FROM Mechanics Where Id = @Id", con);
-                cmd.CommandType = CommandType.Text;
-
-                cmd.Parameters.AddWithValue("@Id", id);
-
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
-        }
   }
 }
