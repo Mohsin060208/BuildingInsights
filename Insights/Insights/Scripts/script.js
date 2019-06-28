@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
-    GetTotalCost();
-    GetTotalSaving();
+    GetTotalCost(); // Get Total Cost 
+    GetTotalSaving(); // Get Total Saving
+    // Loading Charts
     google.charts.load("current", { packages: ['corechart'] });
     google.charts.setOnLoadCallback(drawChartElevatorFailure);
     google.charts.setOnLoadCallback(drawChartElevatorSpend);
@@ -11,6 +12,7 @@
     google.charts.setOnLoadCallback(drawChartChillerFailure);
     google.charts.setOnLoadCallback(drawChartChillerCost);
 })
+// Save Insights Button
 $('#button-save-insights').click(function () {
     SaveTotalCost();
     SaveTotalSaving();
@@ -23,49 +25,73 @@ $('#button-save-insights').click(function () {
     SaveBoilerFailure();
     SaveBoilerCost();
 })
+
+// Saving Total Cost
 $('#button-total-cost-save').click(function () {
     SaveTotalCost();
 })
 
+// Saving Total Savings
 $('#button-total-savings-save').click(function () {
     SaveTotalSaving()
 })
+
+// Saving Elevator Failure
 $('#button-save-elevator-failure').click(function () {
     SaveElevatorFailure()
 })
+
+// Saving Elevator Cost
 $('#button-save-elevator-cost').click(function () {
     SaveElevatorCost();
 })
 
+// Saving Plumbing Cost
 $('#button-save-plumbing-cost').click(function () {
     SavePlumbingCost();
 })
 
+// Saving Operational Plumbing Cost
 $('#button-save-operational-plumbing').click(function () {
     SaveOperationalPlumbingCost();
 })
 
+// Saving Boiler Failure
 $('#button-save-boiler-failure').click(function () {
     SaveBoilerFailure();
 })
 
+// Saving Boiler Cost
 $('#button-save-boiler-cost').click(function () {
     SaveBoilerCost();
 })
 
+// Saving Chiller Failure
 $('#button-save-chiller-failure').click(function () {
     SaveChillerFailure();
 })
 
+// Saving Chiller Cost
 $('#button-save-chiller-cost').click(function () {
     SaveChillerCost();
 })
+
+// Getting Total Saving on Year Selection
 $("#select-year-saving").change(function () {
     GetTotalSaving();
 });
+
+// Getting Total Cost on Year Selection
 $("#select-year-cost").change(function () {
     GetTotalCost();
 });
+
+/* All the functions are below
+---------------------------------------------------------------------------------------
+ */
+
+// functions for saving
+
 function SaveTotalCost() {
     var tb = document.getElementById("tb-total-cost").value;
     var p = "p-building-total-cost";
@@ -210,7 +236,7 @@ function SaveChillerCost() {
     SaveCosts(model);
 }
 
-
+// Functions for Getting Data
 
 function drawChartElevatorFailure() {
     var model = {

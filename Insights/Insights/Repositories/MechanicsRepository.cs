@@ -9,6 +9,7 @@ namespace Repository
 {
     public class MechanicsRepository
     {
+        // Connection String which I provided in Web.config. Can be changed there.
         string conStr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
         public List<object> GetMechanicsFailureByType(Mechanics mechanics)
         {

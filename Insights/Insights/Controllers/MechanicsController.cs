@@ -14,6 +14,7 @@ namespace Insights.Controllers
             _mechanicsRepository = new MechanicsRepository();
         }
 
+        // Getting the Failure Charts 
         [ActionName("GetFailureChartData")]
         [HttpGet]
         public List<object> GetFailureChartData([FromUri] Mechanics mechanics)
@@ -21,6 +22,7 @@ namespace Insights.Controllers
             return _mechanicsRepository.GetMechanicsFailureByType(mechanics);
         }
 
+        // Getting the Cost Charts 
         [ActionName("GetCostChartData")]
         [HttpGet]
         public List<object> GetCostChartData([FromUri] Mechanics mechanics)
@@ -28,6 +30,7 @@ namespace Insights.Controllers
             return _mechanicsRepository.GetMechanicsCostByType(mechanics);
         }
 
+        // Updating the Failure Charts 
         [ActionName("InsertUpdateMechanicsFailure")]
         [HttpPost]
         public void InsertUpdateMechanicsFailure(Mechanics mechanics)
@@ -35,6 +38,7 @@ namespace Insights.Controllers
             _mechanicsRepository.InsertUpdateMechanicsFailureByType(mechanics);
         }
 
+        // Updating the Cost Charts  
         [ActionName("InsertUpdateMechanicsCost")]
         [HttpPost]
         public void InsertUpdateMechanicsCost(Mechanics mechanics)
