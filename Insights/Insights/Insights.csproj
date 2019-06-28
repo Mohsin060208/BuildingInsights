@@ -108,6 +108,8 @@
     </Compile>
     <Compile Include="Repositories\MechanicsRepository.cs" />
     <Compile Include="Repositories\YearlyRecordBookRepository.cs" />
+    <Compile Include="ViewModels\TotalCostView.cs" />
+    <Compile Include="ViewModels\TotalSavingView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

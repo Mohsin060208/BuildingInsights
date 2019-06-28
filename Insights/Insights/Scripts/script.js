@@ -466,7 +466,6 @@ function GetCosts(model) {
 // Function for Validation of input
 
 function Validation(tb, p) {
-    
     if (tb.length == 0) {
         return false;
     }
@@ -482,4 +481,3 @@ function Validation(tb, p) {
         document.getElementById(p).className = "d-none";
         return true;
 }
-

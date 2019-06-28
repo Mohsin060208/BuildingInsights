@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Insights.ViewModels;
+using Model;
 using Newtonsoft.Json;
 using Repository;
 using System;
@@ -19,16 +20,16 @@ namespace Insights.Controllers
         }
         [ActionName("GetTotalCost")]
         [HttpGet]
-        public YearlyRecordBook GetTotalCost([FromUri] YearlyRecordBook yrb)
+        public TotalCostView GetTotalCost([FromUri] TotalCostView tcv)
         {
-            return _yrb.GetTotalCost(yrb);
+            return _yrb.GetTotalCost(tcv);
         }
 
         [ActionName("GetTotalSaving")]
         [HttpGet]
-        public YearlyRecordBook GetTotalSaving([FromUri] YearlyRecordBook yrb)
+        public TotalSavingView GetTotalSaving([FromUri] TotalSavingView tsv)
         {
-            return _yrb.GetTotalSaving(yrb);
+            return _yrb.GetTotalSaving(tsv);
         }
 
         [ActionName("InsertUpdateTotalCost")]
