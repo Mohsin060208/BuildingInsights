@@ -61,3 +61,4 @@ D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insi
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.csproj.CopyComplete
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.dll
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.pdb
+D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.csprojAssemblyReference.cache

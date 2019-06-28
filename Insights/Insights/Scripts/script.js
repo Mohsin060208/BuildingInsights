@@ -96,7 +96,7 @@ function SaveTotalCost() {
     var tb = document.getElementById("tb-total-cost").value;
     var p = "p-building-total-cost";
     var valid = Validation(tb, p);
-    if (tb !== "" && valid == true) { 
+    if (valid == true) { 
         $.ajax({
             type: "POST",
             url: "/api/YearlyRecordBook/InsertUpdateTotalCost",
@@ -122,7 +122,7 @@ function SaveTotalSaving() {
     var tb = document.getElementById("tb-total-savings").value;
     var p = "p-building-total-savings";
     var valid = Validation(tb, p);
-    if (tb !== "" && valid == true) {
+    if (valid == true) {
         $.ajax({
             type: "POST",
             url: "/api/YearlyRecordBook/InsertUpdateTotalSaving",
@@ -235,6 +235,60 @@ function SaveChillerCost() {
     }
     SaveCosts(model);
 }
+function SaveFailures(model) {
+    var tb = document.getElementById(model.Tb).value;
+    console.log(tb.length);
+    var valid = Validation(tb, model.P);
+    if (valid == true) {
+        $.ajax({
+            type: "POST",
+            url: "/api/mechanics/InsertUpdateMechanicsFailure",
+            data: {
+                Type: model.Type,
+                Year: model.Year,
+                Failure: model.Failure,
+                BuildingId: 1
+            },
+            success: function (r) {
+                document.getElementById(model.Tb).value = "";
+                model.Function();
+            },
+            failure: function (r) {
+                alert(r);
+            },
+            error: function (r) {
+                alert(r);
+            }
+        });
+    }
+}
+
+function SaveCosts(model) {
+    var tb = document.getElementById(model.Tb).value;
+    var valid = Validation(tb, model.P);
+    if (valid == true) {
+        $.ajax({
+            type: "POST",
+            url: "/api/mechanics/InsertUpdateMechanicsCost",
+            data: {
+                Type: model.Type,
+                Year: model.Year,
+                Cost: model.Cost,
+                BuildingId: 1
+            },
+            success: function (r) {
+                document.getElementById(model.Tb).value = "";
+                model.Function();
+            },
+            failure: function (r) {
+                alert(r);
+            },
+            error: function (r) {
+                alert(r);
+            }
+        });
+    }
+}
 
 // Functions for Getting Data
 
@@ -345,70 +399,7 @@ function GetTotalSaving() {
         }
     });
 }
-function Validation(tb, p) {    
-    for (var i = 0; i < tb.length; i++) {
-        var thisChar = parseInt(tb[i]);
-        if (isNaN(thisChar)) {
-            document.getElementById(p).className = "error";
-            return false;
-        }
-    }
-    document.getElementById(p).className = "d-none";
-    return true;
-}
-function SaveFailures(model) {
-    var tb = document.getElementById(model.Tb).value;
-    var valid = Validation(tb, model.P);
-    if (tb !== "" && valid == true) {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsFailure",
-            data: {
-                Type: model.Type,
-                Year: model.Year,
-                Failure: model.Failure,
-                BuildingId: 1
-            },
-            success: function (r) {
-                document.getElementById(model.Tb).value = "";
-                model.Function();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
-}
 
-function SaveCosts(model) {
-    var tb = document.getElementById(model.Tb).value;    
-    var valid = Validation(tb,model.P);
-    if (tb !== null && valid == true) {
-        $.ajax({
-            type: "POST",
-            url: "/api/mechanics/InsertUpdateMechanicsCost",
-            data: {
-                Type: model.Type,
-                Year: model.Year,
-                Cost: model.Cost,
-                BuildingId: 1
-            },
-            success: function (r) {
-                document.getElementById(model.Tb).value = "";
-                model.Function();
-            },
-            failure: function (r) {
-                alert(r);
-            },
-            error: function (r) {
-                alert(r);
-            }
-        });
-    }
-}
 function GetFailures(model) {
     var options = {
         bar: { groupWidth: "100%" },
@@ -471,3 +462,24 @@ function GetCosts(model) {
         }
     });
 }
+
+// Function for Validation of input
+
+function Validation(tb, p) {
+    
+    if (tb.length == 0) {
+        return false;
+    }
+    else {
+        for (var i = 0; i < tb.length; i++) {
+            var thisChar = parseInt(tb[i]);
+            if (isNaN(thisChar)) {
+                document.getElementById(p).className = "error";
+                return false;
+            }
+        }
+    }
+        document.getElementById(p).className = "d-none";
+        return true;
+}
+
