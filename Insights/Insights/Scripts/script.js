@@ -110,20 +110,30 @@ function SaveTotalSaving() {
     }
 }
 function SaveElevatorFailure() {
-    var tb = document.getElementById("tb-elevator-failure").value;
+    var model = {
+        Tb: "tb-elevator-failure",
+        Type: "Elevator",
+        Year: $("#select-year-elevator-failure").val(),
+        Failure: $("#tb-elevator-failure").val(),
+        Function: drawChartElevatorFailure
+    }
+    SaveFailures(model);
+}
+function SaveFailures(model) {
+    var tb = document.getElementById(model.Tb).value;
     if (tb !== "") {
         $.ajax({
             type: "POST",
             url: "/api/mechanics/InsertUpdateMechanicsFailure",
             data: {
-                Type: "Elevator",
-                Year: $("#select-year-elevator-failure").val(),
-                Failure: $("#tb-elevator-failure").val(),
+                Type: model.Type,
+                Year: model.Year,
+                Failure: model.Failure,
                 BuildingId: 1
             },
             success: function (r) {
-                $("#tb-elevator-failure").val("");
-                drawChartElevatorFailure();
+                $(model.Tb).val("");
+                model.Function();
             },
             failure: function (r) {
                 alert(r);
@@ -538,7 +548,7 @@ function drawChartChillerFailure() {
     });
 }
 
-    function drawChartChillerCost() {
+function drawChartChillerCost() {
         var options = {
             bar: { groupWidth: "100%" },
             legend: { position: "none" },
