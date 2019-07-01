@@ -11,6 +11,28 @@ namespace Repository
     {
         // Connection String which I provided in Web.config. Can be changed there.
         string conStr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
+        public List<Mechanics> GetFailures()
+        {
+            List<Mechanics> chartData = new List<Mechanics>();
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = new SqlCommand("stp_GetAllMechanicsFailures", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Mechanics mechanics = new Mechanics();
+                    mechanics.Type = rdr["Type"].ToString();
+                    mechanics.Year = Convert.ToInt16(rdr["Year"]);
+                    mechanics.Failure = Convert.ToInt64(rdr["Failure"]);
+                    chartData.Add(mechanics);
+                }
+                con.Close();
+            }
+            return chartData;
+        }
         public List<object> GetMechanicsFailureByType(Mechanics mechanics)
         {
             List<object> chartData = new List<object>();
@@ -35,6 +57,7 @@ namespace Repository
                       
                     });
                 }
+                con.Close();
             }
             return chartData;
         }

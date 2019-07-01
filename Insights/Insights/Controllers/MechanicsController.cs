@@ -14,6 +14,12 @@ namespace Insights.Controllers
             _mechanicsRepository = new MechanicsRepository();
         }
 
+        [ActionName("GetFailures")]
+        [HttpGet]
+        public List<Mechanics> GetFailureCharts()
+        {
+            return _mechanicsRepository.GetFailures();
+        }
         // Getting the Failure Charts 
         [ActionName("GetFailureChartData")]
         [HttpGet]

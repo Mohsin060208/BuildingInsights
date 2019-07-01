@@ -11,6 +11,31 @@ namespace Repository
     {
       
         string conStr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
+        public YearlyRecordBook GetAllRecords(YearlyRecordBook yrb)
+        {
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = new SqlCommand("stp_GetRecordsByYear", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Year", yrb.Year);
+                cmd.Parameters.AddWithValue("@BuildingId", yrb.BuildingId);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    yrb.TotalCost = Convert.ToInt64(rdr["TotalCost"]);
+                    yrb.TotalSaving = Convert.ToInt64(rdr["TotalSaving"]);
+                    yrb.BuildingId = Convert.ToInt32(rdr["BuildingId"]);
+                    yrb.Year = Convert.ToInt16(rdr["Year"]);
+                    yrb.IsActive = (bool)rdr["IsActive"];
+                    yrb.CreatedOn = (DateTime)rdr["CreatedOn"];
+                    yrb.UpdatedOn = (DateTime)rdr["UpdatedOn"];
+                }
+                con.Close();
+            }
+            return yrb;
+        }
         public TotalCostView GetTotalCost(TotalCostView tcv)
         {
             using (SqlConnection con = new SqlConnection(conStr))
@@ -44,15 +69,16 @@ namespace Repository
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                   tsv.TotalSaving = Convert.ToInt64(rdr["TotalSaving"]);
-                   tsv.BuildingId = Convert.ToInt32(rdr["BuildingId"]);
-                   tsv.Year = Convert.ToInt16(rdr["Year"]);
+                    tsv.TotalSaving = Convert.ToInt64(rdr["TotalSaving"]);
+                    tsv.BuildingId = Convert.ToInt32(rdr["BuildingId"]);
+                    tsv.Year = Convert.ToInt16(rdr["Year"]);
                 }
             }
             return tsv;
         }
-        public void InsertUpdateTotalSaving(YearlyRecordBook yrb)
+        public TotalSavingView InsertUpdateTotalSaving(YearlyRecordBook yrb)
         {
+            TotalSavingView tsv = new TotalSavingView();
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = new SqlCommand("stp_SaveTotalSaving", con);
@@ -67,9 +93,13 @@ namespace Repository
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
+            tsv.BuildingId = yrb.BuildingId;
+            tsv.Year = yrb.Year;
+            return GetTotalSaving(tsv);
         }
-        public void InsertUpdateTotalCost(YearlyRecordBook yrb)
+        public TotalCostView InsertUpdateTotalCost(YearlyRecordBook yrb)
         {
+            TotalCostView tcv = new TotalCostView();
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = new SqlCommand("stp_SaveTotalCost", con);
@@ -84,6 +114,9 @@ namespace Repository
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
+            tcv.BuildingId = yrb.BuildingId;
+            tcv.Year = yrb.Year;
+            return GetTotalCost(tcv);
         }
     }
 }

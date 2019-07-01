@@ -18,6 +18,13 @@ namespace Insights.Controllers
         {
             _yrb = new YearlyRecordBookRepository();
         }
+        [ActionName("Get")]
+        [HttpGet]
+        public YearlyRecordBook Get([FromUri] YearlyRecordBook yrb)
+        {
+            return _yrb.GetAllRecords(yrb);
+        }
+
         [ActionName("GetTotalCost")]
         [HttpGet]
         public TotalCostView GetTotalCost([FromUri] TotalCostView tcv)
@@ -34,16 +41,16 @@ namespace Insights.Controllers
 
         [ActionName("InsertUpdateTotalCost")]
         [HttpPost]
-        public void SaveTotalCost(YearlyRecordBook yrb)
+        public TotalCostView SaveTotalCost(YearlyRecordBook yrb)
         {
-            _yrb.InsertUpdateTotalCost(yrb);
+            return _yrb.InsertUpdateTotalCost(yrb);
         }
 
         [ActionName("InsertUpdateTotalSaving")]
         [HttpPost]
-        public void SaveTotalSaving(YearlyRecordBook yrb)
+        public TotalSavingView SaveTotalSaving(YearlyRecordBook yrb)
         {
-            _yrb.InsertUpdateTotalSaving(yrb);
+            return _yrb.InsertUpdateTotalSaving(yrb);
         }
     }
 }

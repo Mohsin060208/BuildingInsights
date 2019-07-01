@@ -1,9 +1,10 @@
 ﻿$(document).ready(function () {
-    GetTotalCost(); // Get Total Cost 
-    GetTotalSaving(); // Get Total Saving
+    GetRecords();
     // Loading Charts
     google.charts.load("current", { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawChartElevatorFailure);
+    DrawFailureCharts();
+    //google.charts.setOnLoadCallBack(DrawFailureCharts);
+    //google.charts.setOnLoadCallback(drawChartElevatorFailure);
     google.charts.setOnLoadCallback(drawChartElevatorSpend);
     google.charts.setOnLoadCallback(drawChartPlumberSpend);
     google.charts.setOnLoadCallback(drawChartPlumberOperational);
@@ -106,7 +107,7 @@ function SaveTotalCost() {
                 BuildingId: 1
             },
             success: function (r) {
-                GetTotalCost();
+                document.getElementById("p-total-cost").innerText = ("$" + r.TotalCost);
                 $("#tb-total-cost").val("")
             },
             failure: function (r) {
@@ -132,7 +133,7 @@ function SaveTotalSaving() {
                 BuildingId: 1
             },
             success: function (r) {
-                GetTotalSaving();
+                document.getElementById("p-total-saving").innerText = ("$" + r.TotalSaving);
                 $("#tb-total-savings").val("");
             },
             failure: function (r) {
@@ -480,4 +481,60 @@ function Validation(tb, p) {
     }
         document.getElementById(p).className = "d-none";
         return true;
+}
+function GetRecords() {
+    $.ajax({
+        type: "GET",
+        url: "/api/YearlyRecordBook/Get",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            "Year": 2018,
+            "BuildingId": 1
+        },
+        success: function (r) {
+            document.getElementById("p-total-saving").innerText = ("$" + r.TotalSaving);
+            document.getElementById("p-total-cost").innerText = ("$" + r.TotalCost);
+        },
+        failure: function (r) {
+            alert(r);
+        },
+        error: function (r) {
+            alert(r);
+        }
+    });
+}
+function DrawFailureCharts() {
+    var options = {
+        bar: { groupWidth: "100%" },
+        legend: { position: "none" },
+    };
+    $.ajax({
+        type: "GET",
+        url: "/api/mechanics/GetFailures",
+        data: {},
+        success: function (r) {
+            console.log(r);
+            arr = jQuery.grep(r, function (item) {
+                return (item.Type = "Elevator", item.Failure);
+            });
+            console.log(arr);
+            document.getElementById("chart-elevator-failure").innerHTML = "";
+            var data = google.visualization.arrayToDataTable(arr);
+            var chart = new google.visualization.ColumnChart("chart-elevator-failure");
+            var view = new google.visualization.DataView(data);
+            chart.draw(view, options);
+            $(window).resize(function () {
+                var view = new google.visualization.DataView(data);
+                chart.draw(view, options);
+            })
+        },
+        failure: function (r) {
+            alert(r);
+        },
+        error: function (r) {
+            alert(r);
+        }
+    });
 }
