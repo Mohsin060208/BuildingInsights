@@ -27,7 +27,7 @@ namespace Insights.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Mechanic> Mechanics { get; set; }
+        public virtual DbSet<Mechanics> Mechanics { get; set; }
         public virtual DbSet<YearlyRecordBook> YearlyRecordBooks { get; set; }
     
         public virtual int CreateUpdateMechanicsCostByType(Nullable<short> year, string type, Nullable<long> cost, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)

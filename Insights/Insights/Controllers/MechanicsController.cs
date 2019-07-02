@@ -1,8 +1,8 @@
 ﻿using Repository;
 using System.Collections.Generic;
 using System.Web.Http;
-using Model;
 using Insights.ViewModels;
+using Insights.Models;
 
 namespace Insights.Controllers
 {

@@ -12,7 +12,7 @@ namespace Insights.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Mechanic
+    public partial class Mechanics
     {
         public int Id { get; set; }
         public int BuildingId { get; set; }
