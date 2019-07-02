@@ -20,7 +20,7 @@ namespace Insights.Models
         public Nullable<long> TotalSaving { get; set; }
         public short Year { get; set; }
         public bool IsActive { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public System.DateTime UpdatedOn { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
     }
 }

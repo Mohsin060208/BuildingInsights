@@ -158,7 +158,7 @@ namespace Insights.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<stp_GetTotalSaving_Result>("stp_GetTotalSaving", yearParameter, buildingIdParameter);
         }
     
-        public virtual int stp_SaveTotalCost(Nullable<short> year, Nullable<long> totalCost, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
+        public virtual int SaveTotalCost(Nullable<short> year, Nullable<long> totalCost, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
         {
             var yearParameter = year.HasValue ?
                 new ObjectParameter("Year", year) :
