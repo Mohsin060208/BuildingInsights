@@ -30,7 +30,7 @@ namespace Insights.Models
         public virtual DbSet<Mechanic> Mechanics { get; set; }
         public virtual DbSet<YearlyRecordBook> YearlyRecordBooks { get; set; }
     
-        public virtual int stp_CreateUpdateMechanicsCostByType(Nullable<short> year, string type, Nullable<long> cost, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
+        public virtual int CreateUpdateMechanicsCostByType(Nullable<short> year, string type, Nullable<long> cost, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
         {
             var yearParameter = year.HasValue ?
                 new ObjectParameter("Year", year) :
@@ -63,7 +63,7 @@ namespace Insights.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("stp_CreateUpdateMechanicsCostByType", yearParameter, typeParameter, costParameter, buildingIdParameter, isActiveParameter, createdOnParameter, updatedOnParameter);
         }
     
-        public virtual int stp_CreateUpdateMechanicsFailureByType(Nullable<short> year, string type, Nullable<long> failure, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
+        public virtual int CreateUpdateMechanicsFailureByType(Nullable<short> year, string type, Nullable<long> failure, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
         {
             var yearParameter = year.HasValue ?
                 new ObjectParameter("Year", year) :
@@ -96,12 +96,12 @@ namespace Insights.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("stp_CreateUpdateMechanicsFailureByType", yearParameter, typeParameter, failureParameter, buildingIdParameter, isActiveParameter, createdOnParameter, updatedOnParameter);
         }
     
-        public virtual ObjectResult<stp_GetAllMechanics_Result> stp_GetAllMechanics()
+        public virtual ObjectResult<stp_GetAllMechanics_Result> GetAllMechanics()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<stp_GetAllMechanics_Result>("stp_GetAllMechanics");
         }
     
-        public virtual ObjectResult<stp_GetMechanicsCostByType_Result> stp_GetMechanicsCostByType(string type)
+        public virtual ObjectResult<stp_GetMechanicsCostByType_Result> GetMechanicsCostByType(string type)
         {
             var typeParameter = type != null ?
                 new ObjectParameter("Type", type) :
@@ -110,7 +110,7 @@ namespace Insights.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<stp_GetMechanicsCostByType_Result>("stp_GetMechanicsCostByType", typeParameter);
         }
     
-        public virtual ObjectResult<stp_GetMechanicsFailureByType_Result> stp_GetMechanicsFailureByType(string type)
+        public virtual ObjectResult<stp_GetMechanicsFailureByType_Result> GetMechanicsFailureByType(string type)
         {
             var typeParameter = type != null ?
                 new ObjectParameter("Type", type) :
@@ -119,7 +119,7 @@ namespace Insights.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<stp_GetMechanicsFailureByType_Result>("stp_GetMechanicsFailureByType", typeParameter);
         }
     
-        public virtual ObjectResult<stp_GetRecordsByYear_Result> stp_GetRecordsByYear(Nullable<short> year, Nullable<int> buildingId)
+        public virtual ObjectResult<stp_GetRecordsByYear_Result> GetRecordsByYear(Nullable<short> year, Nullable<int> buildingId)
         {
             var yearParameter = year.HasValue ?
                 new ObjectParameter("Year", year) :
@@ -132,7 +132,7 @@ namespace Insights.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<stp_GetRecordsByYear_Result>("stp_GetRecordsByYear", yearParameter, buildingIdParameter);
         }
     
-        public virtual ObjectResult<stp_GetTotalCost_Result> stp_GetTotalCost(Nullable<short> year, Nullable<int> buildingId)
+        public virtual ObjectResult<stp_GetTotalCost_Result> GetTotalCost(Nullable<short> year, Nullable<int> buildingId)
         {
             var yearParameter = year.HasValue ?
                 new ObjectParameter("Year", year) :
@@ -145,7 +145,7 @@ namespace Insights.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<stp_GetTotalCost_Result>("stp_GetTotalCost", yearParameter, buildingIdParameter);
         }
     
-        public virtual ObjectResult<stp_GetTotalSaving_Result> stp_GetTotalSaving(Nullable<short> year, Nullable<int> buildingId)
+        public virtual ObjectResult<stp_GetTotalSaving_Result> GetTotalSaving(Nullable<short> year, Nullable<int> buildingId)
         {
             var yearParameter = year.HasValue ?
                 new ObjectParameter("Year", year) :
@@ -187,7 +187,7 @@ namespace Insights.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("stp_SaveTotalCost", yearParameter, totalCostParameter, buildingIdParameter, isActiveParameter, createdOnParameter, updatedOnParameter);
         }
     
-        public virtual int stp_SaveTotalSaving(Nullable<short> year, Nullable<long> totalSaving, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
+        public virtual int SaveTotalSaving(Nullable<short> year, Nullable<long> totalSaving, Nullable<int> buildingId, Nullable<bool> isActive, Nullable<System.DateTime> createdOn, Nullable<System.DateTime> updatedOn)
         {
             var yearParameter = year.HasValue ?
                 new ObjectParameter("Year", year) :
@@ -214,58 +214,6 @@ namespace Insights.Models
                 new ObjectParameter("UpdatedOn", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("stp_SaveTotalSaving", yearParameter, totalSavingParameter, buildingIdParameter, isActiveParameter, createdOnParameter, updatedOnParameter);
-        }
-    
-        public virtual ObjectResult<YearlyRecordBook> GetRecordsByYear(Nullable<short> year, Nullable<int> buildingId)
-        {
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("Year", year) :
-                new ObjectParameter("Year", typeof(short));
-    
-            var buildingIdParameter = buildingId.HasValue ?
-                new ObjectParameter("BuildingId", buildingId) :
-                new ObjectParameter("BuildingId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<YearlyRecordBook>("GetRecordsByYear", yearParameter, buildingIdParameter);
-        }
-    
-        public virtual ObjectResult<YearlyRecordBook> GetRecordsByYear(Nullable<short> year, Nullable<int> buildingId, MergeOption mergeOption)
-        {
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("Year", year) :
-                new ObjectParameter("Year", typeof(short));
-    
-            var buildingIdParameter = buildingId.HasValue ?
-                new ObjectParameter("BuildingId", buildingId) :
-                new ObjectParameter("BuildingId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<YearlyRecordBook>("GetRecordsByYear", mergeOption, yearParameter, buildingIdParameter);
-        }
-    
-        public virtual ObjectResult<YearlyRecordBook> GetRecords(Nullable<short> year, Nullable<int> buildingId)
-        {
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("Year", year) :
-                new ObjectParameter("Year", typeof(short));
-    
-            var buildingIdParameter = buildingId.HasValue ?
-                new ObjectParameter("BuildingId", buildingId) :
-                new ObjectParameter("BuildingId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<YearlyRecordBook>("GetRecords", yearParameter, buildingIdParameter);
-        }
-    
-        public virtual ObjectResult<YearlyRecordBook> GetRecords(Nullable<short> year, Nullable<int> buildingId, MergeOption mergeOption)
-        {
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("Year", year) :
-                new ObjectParameter("Year", typeof(short));
-    
-            var buildingIdParameter = buildingId.HasValue ?
-                new ObjectParameter("BuildingId", buildingId) :
-                new ObjectParameter("BuildingId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<YearlyRecordBook>("GetRecords", mergeOption, yearParameter, buildingIdParameter);
-        }
+        }  
     }
 }
