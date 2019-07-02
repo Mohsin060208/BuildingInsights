@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Insights.Models;
 using Insights.ViewModels;
 using Model;
 
@@ -13,28 +14,43 @@ namespace Repository
         string conStr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
         public YearlyRecordBook GetAllRecords(YearlyRecordBook yrb)
         {
-            using (SqlConnection con = new SqlConnection(conStr))
+            using(var context = new InsightsDBEntities())
             {
-                SqlCommand cmd = new SqlCommand("stp_GetRecordsByYear", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Year", yrb.Year);
-                cmd.Parameters.AddWithValue("@BuildingId", yrb.BuildingId);
-                con.Open();
-                SqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
+             var records = context.stp_GetRecordsByYear(yrb.Year,yrb.BuildingId);
+                foreach (var record in records)
                 {
-                    yrb.TotalCost = Convert.ToInt64(rdr["TotalCost"]);
-                    yrb.TotalSaving = Convert.ToInt64(rdr["TotalSaving"]);
-                    yrb.BuildingId = Convert.ToInt32(rdr["BuildingId"]);
-                    yrb.Year = Convert.ToInt16(rdr["Year"]);
-                    yrb.IsActive = (bool)rdr["IsActive"];
-                    yrb.CreatedOn = (DateTime)rdr["CreatedOn"];
-                    yrb.UpdatedOn = (DateTime)rdr["UpdatedOn"];
+                    yrb.TotalCost = record.TotalCost;
+                    yrb.TotalSaving = record.TotalSaving;
+                    yrb.BuildingId = record.BuildingId;
+                    yrb.Year = record.Year;
+                    yrb.IsActive = record.IsActive;
+                    yrb.CreatedOn = yrb.CreatedOn;
+                    yrb.UpdatedOn = yrb.UpdatedOn;
                 }
-                con.Close();
             }
             return yrb;
+            //using (SqlConnection con = new SqlConnection(conStr))
+            //{
+            //    SqlCommand cmd = new SqlCommand("stp_GetRecordsByYear", con);
+            //    cmd.CommandType = CommandType.StoredProcedure;
+            //    cmd.Parameters.AddWithValue("@Year", yrb.Year);
+            //    cmd.Parameters.AddWithValue("@BuildingId", yrb.BuildingId);
+            //    con.Open();
+            //    SqlDataReader rdr = cmd.ExecuteReader();
+
+            //    while (rdr.Read())
+            //    {
+            //        yrb.TotalCost = Convert.ToInt64(rdr["TotalCost"]);
+            //        yrb.TotalSaving = Convert.ToInt64(rdr["TotalSaving"]);
+            //        yrb.BuildingId = Convert.ToInt32(rdr["BuildingId"]);
+            //        yrb.Year = Convert.ToInt16(rdr["Year"]);
+            //        yrb.IsActive = (bool)rdr["IsActive"];
+            //        yrb.CreatedOn = (DateTime)rdr["CreatedOn"];
+            //        yrb.UpdatedOn = (DateTime)rdr["UpdatedOn"];
+            //    }
+            //    con.Close();
+            //}
+            //return yrb;
         }
         public TotalCostView GetTotalCost(TotalCostView tcv)
         {

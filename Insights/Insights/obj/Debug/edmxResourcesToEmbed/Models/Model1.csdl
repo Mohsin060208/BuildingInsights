@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsightsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Mechanic">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingId" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cost" Type="Int64" />
+    <Property Name="Failure" Type="Int64" />
+    <Property Name="Year" Type="Int16" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="YearlyRecordBook">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingId" Type="Int32" Nullable="false" />
+    <Property Name="TotalCost" Type="Int64" />
+    <Property Name="TotalSaving" Type="Int64" />
+    <Property Name="Year" Type="Int16" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="InsightsDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Mechanics" EntityType="Self.Mechanic" />
+    <EntitySet Name="YearlyRecordBooks" EntityType="Self.YearlyRecordBook" />
+    <FunctionImport Name="stp_CreateUpdateMechanicsCostByType">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="Cost" Mode="In" Type="Int64" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="stp_CreateUpdateMechanicsFailureByType">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="Failure" Mode="In" Type="Int64" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="stp_GetAllMechanics" ReturnType="Collection(InsightsDBModel.stp_GetAllMechanics_Result)" />
+    <FunctionImport Name="stp_GetMechanicsCostByType" ReturnType="Collection(InsightsDBModel.stp_GetMechanicsCostByType_Result)">
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_GetMechanicsFailureByType" ReturnType="Collection(InsightsDBModel.stp_GetMechanicsFailureByType_Result)">
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="stp_GetRecordsByYear" ReturnType="Collection(InsightsDBModel.stp_GetRecordsByYear_Result)">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_GetTotalCost" ReturnType="Collection(InsightsDBModel.stp_GetTotalCost_Result)">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_GetTotalSaving" ReturnType="Collection(InsightsDBModel.stp_GetTotalSaving_Result)">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="stp_SaveTotalCost">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="TotalCost" Mode="In" Type="Int64" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="stp_SaveTotalSaving">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="TotalSaving" Mode="In" Type="Int64" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+      <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetRecordsByYear" EntitySet="YearlyRecordBooks" ReturnType="Collection(InsightsDBModel.YearlyRecordBook)">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetRecords" EntitySet="YearlyRecordBooks" ReturnType="Collection(InsightsDBModel.YearlyRecordBook)">
+      <Parameter Name="Year" Mode="In" Type="Int16" />
+      <Parameter Name="BuildingId" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="stp_GetAllMechanics_Result">
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="255" />
+    <Property Type="Int64" Name="Cost" Nullable="false" />
+    <Property Type="Int64" Name="Failure" Nullable="false" />
+    <Property Type="Int16" Name="Year" Nullable="false" />
+    <Property Type="Int32" Name="BuildingId" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedOn" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="stp_GetMechanicsCostByType_Result">
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="255" />
+    <Property Type="Int64" Name="Cost" Nullable="true" />
+    <Property Type="Int16" Name="Year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_GetMechanicsFailureByType_Result">
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="255" />
+    <Property Type="Int64" Name="Failure" Nullable="false" />
+    <Property Type="Int16" Name="Year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_GetRecordsByYear_Result">
+    <Property Type="Int64" Name="TotalCost" Nullable="false" />
+    <Property Type="Int64" Name="TotalSaving" Nullable="false" />
+    <Property Type="Int32" Name="BuildingId" Nullable="false" />
+    <Property Type="Int16" Name="Year" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="UpdatedOn" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="stp_GetTotalCost_Result">
+    <Property Type="Int64" Name="TotalCost" Nullable="false" />
+    <Property Type="Int32" Name="BuildingId" Nullable="false" />
+    <Property Type="Int16" Name="Year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="stp_GetTotalSaving_Result">
+    <Property Type="Int64" Name="TotalSaving" Nullable="false" />
+    <Property Type="Int32" Name="BuildingId" Nullable="false" />
+    <Property Type="Int16" Name="Year" Nullable="false" />
+  </ComplexType>
+</Schema>

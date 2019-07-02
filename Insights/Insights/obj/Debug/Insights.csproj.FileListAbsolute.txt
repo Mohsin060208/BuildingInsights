@@ -62,3 +62,7 @@ D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insi
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.dll
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.pdb
 D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\obj\Debug\Insights.csprojAssemblyReference.cache
+D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\bin\EntityFramework.dll
+D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\bin\EntityFramework.SqlServer.dll
+D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\bin\EntityFramework.xml
+D:\GithubRepos\Eruditech_Work\The Final Project\Insights\Insights\bin\EntityFramework.SqlServer.xml

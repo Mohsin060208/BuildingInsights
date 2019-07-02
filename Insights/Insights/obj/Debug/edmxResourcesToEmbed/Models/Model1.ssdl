@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InsightsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Mechanics">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuildingId" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Cost" Type="bigint" />
+    <Property Name="Failure" Type="bigint" />
+    <Property Name="Year" Type="smallint" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="YearlyRecordBook">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuildingId" Type="int" Nullable="false" />
+    <Property Name="TotalCost" Type="bigint" />
+    <Property Name="TotalSaving" Type="bigint" />
+    <Property Name="Year" Type="smallint" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Function Name="stp_CreateUpdateMechanicsCostByType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="smallint" Mode="In" />
+    <Parameter Name="Type" Type="varchar" Mode="In" />
+    <Parameter Name="Cost" Type="bigint" Mode="In" />
+    <Parameter Name="BuildingId" Type="int" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+    <Parameter Name="CreatedOn" Type="date" Mode="In" />
+    <Parameter Name="UpdatedOn" Type="date" Mode="In" />
+  </Function>
+  <Function Name="stp_CreateUpdateMechanicsFailureByType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="smallint" Mode="In" />
+    <Parameter Name="Type" Type="varchar" Mode="In" />
+    <Parameter Name="Failure" Type="bigint" Mode="In" />
+    <Parameter Name="BuildingId" Type="int" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+    <Parameter Name="CreatedOn" Type="date" Mode="In" />
+    <Parameter Name="UpdatedOn" Type="date" Mode="In" />
+  </Function>
+  <Function Name="stp_GetAllMechanics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="stp_GetMechanicsCostByType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Type" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="stp_GetMechanicsFailureByType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Type" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="stp_GetRecordsByYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="smallint" Mode="In" />
+    <Parameter Name="BuildingId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="stp_GetTotalCost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="smallint" Mode="In" />
+    <Parameter Name="BuildingId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="stp_GetTotalSaving" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="smallint" Mode="In" />
+    <Parameter Name="BuildingId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="stp_SaveTotalCost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="smallint" Mode="In" />
+    <Parameter Name="TotalCost" Type="bigint" Mode="In" />
+    <Parameter Name="BuildingId" Type="int" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+    <Parameter Name="CreatedOn" Type="date" Mode="In" />
+    <Parameter Name="UpdatedOn" Type="date" Mode="In" />
+  </Function>
+  <Function Name="stp_SaveTotalSaving" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Year" Type="smallint" Mode="In" />
+    <Parameter Name="TotalSaving" Type="bigint" Mode="In" />
+    <Parameter Name="BuildingId" Type="int" Mode="In" />
+    <Parameter Name="IsActive" Type="bit" Mode="In" />
+    <Parameter Name="CreatedOn" Type="date" Mode="In" />
+    <Parameter Name="UpdatedOn" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="InsightsDBModelStoreContainer">
+    <EntitySet Name="Mechanics" EntityType="Self.Mechanics" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="YearlyRecordBook" EntityType="Self.YearlyRecordBook" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,4 +1,5 @@
-﻿using Insights.ViewModels;
+﻿using Insights.Models;
+using Insights.ViewModels;
 using Model;
 using Newtonsoft.Json;
 using Repository;

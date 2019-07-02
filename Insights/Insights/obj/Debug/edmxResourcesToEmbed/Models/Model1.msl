@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InsightsDBModelStoreContainer" CdmEntityContainer="InsightsDBEntities">
+    <EntitySetMapping Name="Mechanics">
+      <EntityTypeMapping TypeName="InsightsDBModel.Mechanic">
+        <MappingFragment StoreEntitySet="Mechanics">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Failure" ColumnName="Failure" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="YearlyRecordBooks">
+      <EntityTypeMapping TypeName="InsightsDBModel.YearlyRecordBook">
+        <MappingFragment StoreEntitySet="YearlyRecordBook">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="TotalSaving" ColumnName="TotalSaving" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="stp_CreateUpdateMechanicsCostByType" FunctionName="InsightsDBModel.Store.stp_CreateUpdateMechanicsCostByType" />
+    <FunctionImportMapping FunctionImportName="stp_CreateUpdateMechanicsFailureByType" FunctionName="InsightsDBModel.Store.stp_CreateUpdateMechanicsFailureByType" />
+    <FunctionImportMapping FunctionImportName="stp_GetAllMechanics" FunctionName="InsightsDBModel.Store.stp_GetAllMechanics">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InsightsDBModel.stp_GetAllMechanics_Result">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Failure" ColumnName="Failure" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="stp_GetMechanicsCostByType" FunctionName="InsightsDBModel.Store.stp_GetMechanicsCostByType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InsightsDBModel.stp_GetMechanicsCostByType_Result">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="stp_GetMechanicsFailureByType" FunctionName="InsightsDBModel.Store.stp_GetMechanicsFailureByType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InsightsDBModel.stp_GetMechanicsFailureByType_Result">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Failure" ColumnName="Failure" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="stp_GetRecordsByYear" FunctionName="InsightsDBModel.Store.stp_GetRecordsByYear">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InsightsDBModel.stp_GetRecordsByYear_Result">
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="TotalSaving" ColumnName="TotalSaving" />
+          <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="stp_GetTotalCost" FunctionName="InsightsDBModel.Store.stp_GetTotalCost">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InsightsDBModel.stp_GetTotalCost_Result">
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="stp_GetTotalSaving" FunctionName="InsightsDBModel.Store.stp_GetTotalSaving">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="InsightsDBModel.stp_GetTotalSaving_Result">
+          <ScalarProperty Name="TotalSaving" ColumnName="TotalSaving" />
+          <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="stp_SaveTotalCost" FunctionName="InsightsDBModel.Store.stp_SaveTotalCost" />
+    <FunctionImportMapping FunctionImportName="stp_SaveTotalSaving" FunctionName="InsightsDBModel.Store.stp_SaveTotalSaving" />
+    <FunctionImportMapping FunctionImportName="GetRecordsByYear" FunctionName="InsightsDBModel.Store.stp_GetRecordsByYear" />
+    <FunctionImportMapping FunctionImportName="GetRecords" FunctionName="InsightsDBModel.Store.stp_GetRecordsByYear" />
+  </EntityContainerMapping>
+</Mapping>

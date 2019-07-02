@@ -10,15 +10,14 @@
 namespace Insights.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class YearlyRecordBook
+    public partial class stp_GetAllMechanics_Result
     {
-        public int Id { get; set; }
-        public int BuildingId { get; set; }
-        public Nullable<long> TotalCost { get; set; }
-        public Nullable<long> TotalSaving { get; set; }
+        public string Type { get; set; }
+        public long Cost { get; set; }
+        public long Failure { get; set; }
         public short Year { get; set; }
+        public int BuildingId { get; set; }
         public bool IsActive { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime UpdatedOn { get; set; }
