@@ -2,16 +2,7 @@
     GetRecords();
     // Loading Charts
     google.charts.load("current", { packages: ['corechart'] });
-    DrawFailureCharts();
-    //google.charts.setOnLoadCallBack(DrawFailureCharts);
-    //google.charts.setOnLoadCallback(drawChartElevatorFailure);
-    google.charts.setOnLoadCallback(drawChartElevatorSpend);
-    google.charts.setOnLoadCallback(drawChartPlumberSpend);
-    google.charts.setOnLoadCallback(drawChartPlumberOperational);
-    google.charts.setOnLoadCallback(drawChartBoilerFailure);
-    google.charts.setOnLoadCallback(drawChartBoilerCost);
-    google.charts.setOnLoadCallback(drawChartChillerFailure);
-    google.charts.setOnLoadCallback(drawChartChillerCost);
+    google.charts.setOnLoadCallback(getCharts);
 })
 // Save Insights Button
 $('#button-save-insights').click(function () {
@@ -238,7 +229,6 @@ function SaveChillerCost() {
 }
 function SaveFailures(model) {
     var tb = document.getElementById(model.Tb).value;
-    console.log(tb.length);
     var valid = Validation(tb, model.P);
     if (valid == true) {
         $.ajax({
@@ -251,8 +241,15 @@ function SaveFailures(model) {
                 BuildingId: 1
             },
             success: function (r) {
-                document.getElementById(model.Tb).value = "";
-                model.Function();
+                var array = new Array();
+                array.push(new Array("Year", "Failure"));
+                arr = jQuery.grep(r, function (item) {
+                    return (item.Type == model.Type);
+                });
+                arr.map(function (obj) {
+                    array.push(new Array(obj.Year, obj.Failure));
+                });
+                model.Function(array);
             },
             failure: function (r) {
                 alert(r);
@@ -279,7 +276,15 @@ function SaveCosts(model) {
             },
             success: function (r) {
                 document.getElementById(model.Tb).value = "";
-                model.Function();
+                var array = new Array();
+                array.push(new Array("Year", "Cost"));
+                arr = jQuery.grep(r, function (item) {
+                    return (item.Type == model.Type);
+                });
+                arr.map(function (obj) {
+                    array.push(new Array(obj.Year, obj.Cost));
+                });
+                model.Function(array);
             },
             failure: function (r) {
                 alert(r);
@@ -293,68 +298,68 @@ function SaveCosts(model) {
 
 // Functions for Getting Data
 
-function drawChartElevatorFailure() {
+function drawChartElevatorFailure(data) {
     var model = {
-        Type: "Elevator",
-        Div: "chart-elevator-failure"
+        Div: "chart-elevator-failure",
+        Data: data
     }
-    GetFailures(model);
+    drawChart(model);
 }
 
-function drawChartElevatorSpend() {
+function drawChartElevatorSpend(data) {
     var model = {
-        Type: "Elevator",
+        Data: data,
         Div: "chart-elevator-spend"
     }
-    GetCosts(model);
+    drawChart(model);
 }
 
-function drawChartPlumberSpend() {
+function drawChartPlumberSpend(data) {
     var model = {
-        Type: "Plumbing",
+        Data: data,
         Div: "chart-plumber-spend"
     }
-    GetCosts(model);
+    drawChart(model);
 }
 
-function drawChartPlumberOperational() {
+function drawChartPlumberOperational(data) {
     var model = {
-        Type: "Operational Plumbing",
+        Data: data,
         Div: "chart-plumber-operational"
     }
-    GetCosts(model);
+    drawChart(model);
 }
 
-function drawChartBoilerFailure() {
+function drawChartBoilerFailure(data) {
     var model = {
-        Type: "Boiler",
-        Div: "chart-boiler-failure"
+        Div: "chart-boiler-failure",
+        Data: data
     }
-    GetFailures(model);
+    drawChart(model);
 }
 
-function drawChartBoilerCost() {
+function drawChartBoilerCost(data) {
     var model = {
-        Type: "Boiler",
-        Div: "chart-boiler-cost"
+        Div: "chart-boiler-cost",
+        Data: data
     }
-    GetCosts(model);
+    drawChart(model);
 }
 
-function drawChartChillerFailure() {
+function drawChartChillerFailure(data) {
     var model = {
-        Type: "Chiller",
-        Div: "chart-chiller-failure"
+        Div: "chart-chiller-failure",
+        Data: data
     }
-    GetFailures(model);
+    drawChart(model);
 }
 
-function drawChartChillerCost() {
+function drawChartChillerCost(data) {
     var model = {
-        Type: "Chiller",
-        Div: "chart-chiller-cost"
+        Div: "chart-chiller-cost",
+        Data: data
     }
-    GetCosts(model);
+    drawChart(model);
 }
 function GetTotalCost() {
     $.ajax({
@@ -401,67 +406,20 @@ function GetTotalSaving() {
     });
 }
 
-function GetFailures(model) {
+function drawChart(model) {
     var options = {
         bar: { groupWidth: "100%" },
         legend: { position: "none" },
     };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetFailureChartData",
-        data: { "Type": model.Type },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById(model.Div).innerHTML = "";
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById(model.Div));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
-}
-function GetCosts(model) {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
-    $.ajax({
-        type: "GET",
-        url: "/api/mechanics/GetCostChartData",
-        data: { "Type": model.Type },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        success: function (r) {
-            document.getElementById(model.Div).innerHTML = "";
-            var data = google.visualization.arrayToDataTable(r);
-            var chart = new google.visualization.ColumnChart(document.getElementById(model.Div));
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
-        },
-        failure: function (r) {
-            alert(r);
-        },
-        error: function (r) {
-            alert(r);
-        }
-    });
+    document.getElementById(model.Div).innerHTML = "";
+    var data = google.visualization.arrayToDataTable();
+    var chart = new google.visualization.ColumnChart(document.getElementById(model.Div));
+    var view = new google.visualization.DataView(data);
+    chart.draw(view, options);
+    $(window).resize(function () {
+        var view = new google.visualization.DataView(data);
+        chart.draw(view, options);
+    })
 }
 
 // Function for Validation of input
@@ -505,30 +463,84 @@ function GetRecords() {
         }
     });
 }
-function DrawFailureCharts() {
-    var options = {
-        bar: { groupWidth: "100%" },
-        legend: { position: "none" },
-    };
+function getCharts() {
     $.ajax({
         type: "GET",
-        url: "/api/mechanics/GetFailures",
+        url: "/api/mechanics/Get",
         data: {},
         success: function (r) {
-            console.log(r);
+            var array = new Array();
+            array.push(new Array("Year", "Failure"));
             arr = jQuery.grep(r, function (item) {
-                return (item.Type = "Elevator", item.Failure);
+                return (item.Type == "Elevator");
             });
-            console.log(arr);
-            document.getElementById("chart-elevator-failure").innerHTML = "";
-            var data = google.visualization.arrayToDataTable(arr);
-            var chart = new google.visualization.ColumnChart("chart-elevator-failure");
-            var view = new google.visualization.DataView(data);
-            chart.draw(view, options);
-            $(window).resize(function () {
-                var view = new google.visualization.DataView(data);
-                chart.draw(view, options);
-            })
+            arr.map(function (obj) {
+                array.push(new Array(obj.Year, obj.Failure));
+            });
+            drawChartElevatorFailure(array);
+            var array = new Array();
+            array.push(new Array("Year", "Failure"));
+            arr = jQuery.grep(r, function (item) {
+                return (item.Type == "Boiler");
+            });
+            arr.map(function (obj) {
+                array.push(new Array(obj.Year, obj.Failure));
+            });
+            drawChartBoilerFailure(array);
+            var array = new Array();
+            array.push(new Array("Year", "Failure"));
+            arr = jQuery.grep(r, function (item) {
+                return (item.Type == "Chiller");
+            });
+            arr.map(function (obj) {
+                array.push(new Array(obj.Year, obj.Failure));
+            });
+            drawChartChillerFailure(array);
+            var array = new Array();
+            array.push(new Array("Year", "Cost"));
+            arr = jQuery.grep(r, function (item) {
+                return (item.Type == "Elevator");
+            });
+            arr.map(function (obj) {
+                array.push(new Array(obj.Year, obj.Cost));
+            });
+            drawChartElevatorSpend(array);
+            var array = new Array();
+            array.push(new Array("Year", "Cost"));
+            arr = jQuery.grep(r, function (item) {
+                return (item.Type == "Boiler");
+            });
+            arr.map(function (obj) {
+                array.push(new Array(obj.Year, obj.Cost));
+            });
+            drawChartBoilerCost(array);
+            var array = new Array();
+            array.push(new Array("Year", "Cost"));
+            arr = jQuery.grep(r, function (item) {
+                return (item.Type == "Operational Plumbing");
+            });
+            arr.map(function (obj) {
+                array.push(new Array(obj.Year, obj.Cost));
+            });
+            drawChartPlumberOperational(array);
+            var array = new Array();
+            array.push(new Array("Year", "Cost"));
+            arr = jQuery.grep(r, function (item) {
+                return (item.Type == "Plumbing");
+            });
+            arr.map(function (obj) {
+                array.push(new Array(obj.Year, obj.Cost));
+            });
+            drawChartPlumberSpend(array);
+            var array = new Array();
+            array.push(new Array("Year", "Cost"));
+            arr = jQuery.grep(r, function (item) {
+                return (item.Type == "Chiller");
+            });
+            arr.map(function (obj) {
+                array.push(new Array(obj.Year, obj.Cost));
+            });
+            drawChartChillerCost(array);
         },
         failure: function (r) {
             alert(r);

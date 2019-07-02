@@ -4,42 +4,47 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using Model;
 using System.Configuration;
+using Insights.ViewModels;
+using System.Linq;
 
 namespace Repository
 {
     public class MechanicsRepository
     {
-        // Connection String which I provided in Web.config. Can be changed there.
         string conStr = ConfigurationManager.ConnectionStrings["conStr"].ConnectionString;
-        public List<Mechanics> GetFailures()
+        public List<MechanicsView> GetAllMechanics()
         {
-            List<Mechanics> chartData = new List<Mechanics>();
+            List<MechanicsView> chartData = new List<MechanicsView>();
             using (SqlConnection con = new SqlConnection(conStr))
             {
-                SqlCommand cmd = new SqlCommand("stp_GetAllMechanicsFailures", con);
+                SqlCommand cmd = new SqlCommand("stp_GetAllMechanics", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    Mechanics mechanics = new Mechanics();
+                    MechanicsView mechanics = new MechanicsView();
                     mechanics.Type = rdr["Type"].ToString();
-                    mechanics.Year = Convert.ToInt16(rdr["Year"]);
+                    mechanics.Year = (rdr["Year"]).ToString();
+                    mechanics.Cost = Convert.ToInt64(rdr["Cost"]);
                     mechanics.Failure = Convert.ToInt64(rdr["Failure"]);
+                    mechanics.BuildingId = Convert.ToInt32(rdr["BuildingId"]);
+                    mechanics.IsActive = (bool)rdr["IsActive"];
+                    mechanics.CreatedOn = (DateTime)rdr["CreatedOn"];
+                    mechanics.UpdatedOn = (DateTime)rdr["UpdatedOn"];
                     chartData.Add(mechanics);
                 }
                 con.Close();
             }
+            chartData.GroupBy(x => x.Year)
+           .Select(grp => grp.ToList())
+           .ToList();
             return chartData;
         }
-        public List<object> GetMechanicsFailureByType(Mechanics mechanics)
+        public List<MechanicsFailureView> GetMechanicsFailureByType(Mechanics mechanics)
         {
-            List<object> chartData = new List<object>();
-            chartData.Add(new object[]
-        {
-            "Year", "Amount"
-        });
+            List<MechanicsFailureView> chartData = new List<MechanicsFailureView>();
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = new SqlCommand("stp_GetMechanicsFailureByType", con);
@@ -50,24 +55,22 @@ namespace Repository
 
                 while (rdr.Read())
                 {
-                    chartData.Add(new object[]
-                    {
-                        rdr["Year"].ToString(),
-                      rdr["Failure"]
-                      
-                    });
+                    MechanicsFailureView mfv = new MechanicsFailureView();
+                    mfv.Type = rdr["Type"].ToString();
+                    mfv.Year = (rdr["Year"]).ToString();
+                    mfv.Failure = Convert.ToInt64(rdr["Failure"]);
+                    chartData.Add(mfv);
                 }
                 con.Close();
             }
+            chartData.GroupBy(x => x.Year)
+           .Select(grp => grp.ToList())
+           .ToList();
             return chartData;
         }
-        public List<object> GetMechanicsCostByType(Mechanics mechanics)
+        public List<MechanicsCostView> GetMechanicsCostByType(Mechanics mechanics)
         {
-            List<object> chartData = new List<object>();
-            chartData.Add(new object[]
-        {
-            "Year", "Amount"
-        });
+            List<MechanicsCostView> chartData = new List<MechanicsCostView>();
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = new SqlCommand("stp_GetMechanicsCostByType", con);
@@ -77,18 +80,20 @@ namespace Repository
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    chartData.Add(new object[]
-                    {
-                        rdr["Year"].ToString(),
-                      rdr["Cost"]
-
-                    });
+                    MechanicsCostView mcv = new MechanicsCostView();
+                    mcv.Type = rdr["Type"].ToString();
+                    mcv.Year = (rdr["Year"]).ToString();
+                    mcv.Cost = Convert.ToInt64(rdr["Cost"]);
+                    chartData.Add(mcv);
                 }
                 con.Close();
             }
+            chartData.GroupBy(x => x.Year)
+           .Select(grp => grp.ToList())
+           .ToList();
             return chartData;
         }
-        public void InsertUpdateMechanicsFailureByType(Mechanics mechanics)
+        public List<MechanicsFailureView> InsertUpdateMechanicsFailureByType(Mechanics mechanics)
         {
             using (SqlConnection con = new SqlConnection(conStr))
             {
@@ -104,9 +109,10 @@ namespace Repository
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
-            }
+            }            
+            return GetMechanicsFailureByType(mechanics);
         }
-        public void InsertUpdateMechanicsCostByType(Mechanics mechanics)
+        public List<MechanicsCostView> InsertUpdateMechanicsCostByType(Mechanics mechanics)
         {
             using (SqlConnection con = new SqlConnection(conStr))
             {
@@ -123,6 +129,7 @@ namespace Repository
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
+            return GetMechanicsCostByType(mechanics);
         }
   }
 }

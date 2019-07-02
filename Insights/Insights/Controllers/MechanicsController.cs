@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Model;
+using Insights.ViewModels;
 
 namespace Insights.Controllers
 {
@@ -14,42 +15,27 @@ namespace Insights.Controllers
             _mechanicsRepository = new MechanicsRepository();
         }
 
-        [ActionName("GetFailures")]
+        [ActionName("Get")]
         [HttpGet]
-        public List<Mechanics> GetFailureCharts()
+        public List<MechanicsView> Get()
         {
-            return _mechanicsRepository.GetFailures();
-        }
-        // Getting the Failure Charts 
-        [ActionName("GetFailureChartData")]
-        [HttpGet]
-        public List<object> GetFailureChartData([FromUri] Mechanics mechanics)
-        {
-            return _mechanicsRepository.GetMechanicsFailureByType(mechanics);
-        }
-
-        // Getting the Cost Charts 
-        [ActionName("GetCostChartData")]
-        [HttpGet]
-        public List<object> GetCostChartData([FromUri] Mechanics mechanics)
-        {
-            return _mechanicsRepository.GetMechanicsCostByType(mechanics);
+            return _mechanicsRepository.GetAllMechanics();
         }
 
         // Updating the Failure Charts 
         [ActionName("InsertUpdateMechanicsFailure")]
         [HttpPost]
-        public void InsertUpdateMechanicsFailure(Mechanics mechanics)
+        public List<MechanicsFailureView> InsertUpdateMechanicsFailure(Mechanics mechanics)
         {
-            _mechanicsRepository.InsertUpdateMechanicsFailureByType(mechanics);
+            return _mechanicsRepository.InsertUpdateMechanicsFailureByType(mechanics);
         }
 
         // Updating the Cost Charts  
         [ActionName("InsertUpdateMechanicsCost")]
         [HttpPost]
-        public void InsertUpdateMechanicsCost(Mechanics mechanics)
+        public List<MechanicsCostView> InsertUpdateMechanicsCost(Mechanics mechanics)
         {
-            _mechanicsRepository.InsertUpdateMechanicsCostByType(mechanics);
+            return _mechanicsRepository.InsertUpdateMechanicsCostByType(mechanics);
         }
     }
 }

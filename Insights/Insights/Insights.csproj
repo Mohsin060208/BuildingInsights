@@ -15,7 +15,7 @@
     <AssemblyName>Insights</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort>44345</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -108,6 +108,9 @@
     </Compile>
     <Compile Include="Repositories\MechanicsRepository.cs" />
     <Compile Include="Repositories\YearlyRecordBookRepository.cs" />
+    <Compile Include="ViewModels\MechanicsCostView.cs" />
+    <Compile Include="ViewModels\MechanicsFailureView.cs" />
+    <Compile Include="ViewModels\MechanicsView.cs" />
     <Compile Include="ViewModels\TotalCostView.cs" />
     <Compile Include="ViewModels\TotalSavingView.cs" />
   </ItemGroup>
@@ -142,7 +145,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55941</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44345/</IISUrl>
+          <IISUrl>https://localhost:44346/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44347/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
