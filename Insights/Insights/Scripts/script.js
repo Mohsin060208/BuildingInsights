@@ -412,7 +412,7 @@ function drawChart(model) {
         legend: { position: "none" },
     };
     document.getElementById(model.Div).innerHTML = "";
-    var data = google.visualization.arrayToDataTable();
+    var data = google.visualization.arrayToDataTable(model.Data);
     var chart = new google.visualization.ColumnChart(document.getElementById(model.Div));
     var view = new google.visualization.DataView(data);
     chart.draw(view, options);
