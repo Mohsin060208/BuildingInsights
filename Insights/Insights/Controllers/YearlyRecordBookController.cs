@@ -12,12 +12,6 @@ namespace Insights.Controllers
         {
             _yrb = new YearlyRecordBookRepository();
         }
-        [ActionName("Get")]
-        [HttpGet]
-        public YearlyRecordBook Get([FromUri] YearlyRecordBook yrb)
-        {
-            return _yrb.GetAllRecords(yrb);
-        }
 
         [ActionName("GetTotalCost")]
         [HttpGet]

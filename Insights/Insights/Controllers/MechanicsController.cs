@@ -15,13 +15,6 @@ namespace Insights.Controllers
             _mechanicsRepository = new MechanicsRepository();
         }
 
-        [ActionName("Get")]
-        [HttpGet]
-        public List<MechanicsView> Get()
-        {
-            return _mechanicsRepository.GetAllMechanics();
-        }
-
         // Updating the Failure Charts 
         [ActionName("InsertUpdateMechanicsFailure")]
         [HttpPost]

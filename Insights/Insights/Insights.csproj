@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\InsightsController.cs" />
     <Compile Include="Controllers\MechanicsController.cs" />
     <Compile Include="Controllers\YearlyRecordBookController.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,6 +162,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\InsightsRepository.cs" />
     <Compile Include="Repositories\MechanicsRepository.cs" />
     <Compile Include="Repositories\YearlyRecordBookRepository.cs" />
     <Compile Include="ViewModels\MechanicsCostView.cs" />
@@ -210,7 +212,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55941</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44344/</IISUrl>
+          <IISUrl>https://localhost:44348/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
