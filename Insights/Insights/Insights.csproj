@@ -105,6 +105,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\get-request.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Web.config" />
@@ -212,7 +213,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55941</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44348/</IISUrl>
+          <IISUrl>https://localhost:44350/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
