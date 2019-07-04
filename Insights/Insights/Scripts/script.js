@@ -72,10 +72,6 @@ $("#select-year-cost").change(function () {
     GetTotalCost();
 });
 
-/* All the functions are below
----------------------------------------------------------------------------------------
- */
-
 // functions for saving
 
 function SaveTotalCost() {
