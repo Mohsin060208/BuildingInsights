@@ -1,10 +1,7 @@
 ﻿using Insights.Models;
 using Insights.ViewModels;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Insights.Repositories
 {
