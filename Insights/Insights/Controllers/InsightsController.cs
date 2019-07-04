@@ -18,7 +18,7 @@ namespace Insights.Controllers
         }
         [ActionName("Get")]
         [HttpGet]
-        public List<object> Get([FromUri] YearlyRecordBook yrb)
+        public IEnumerable<object> Get([FromUri] YearlyRecordBook yrb)
         {
             return _insights.GetAll(yrb);
         }
