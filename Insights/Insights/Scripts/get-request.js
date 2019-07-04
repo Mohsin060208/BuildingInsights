@@ -1,7 +1,6 @@
-﻿$(document).ready(function () {
-    google.charts.load("current", { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(GetRecords);
-})
+﻿google.charts.load("current", { packages: ['corechart'] });
+google.charts.setOnLoadCallback(GetRecords);
+
 function GetRecords() {
     $.ajax({
         type: "GET",
@@ -90,7 +89,7 @@ function GetRecords() {
             drawChartChillerCost(array);
         },
         failure: function (r) {
-            alert(r);
+            alert("Failed");
         },
         error: function (r) {
             alert(r);

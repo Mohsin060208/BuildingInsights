@@ -235,6 +235,7 @@ function SaveFailures(model) {
                 BuildingId: 1
             },
             success: function (r) {
+                document.getElementById(model.Tb).value = "";
                 var array = new Array();
                 array.push(new Array("Year", "Failure"));
                 arr = jQuery.grep(r, function (item) {

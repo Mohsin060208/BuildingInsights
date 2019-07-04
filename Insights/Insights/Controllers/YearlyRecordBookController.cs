@@ -1,13 +1,13 @@
 ﻿using Insights.Models;
 using Insights.ViewModels;
-using Repository;
 using System.Web.Http;
+using Inights.Repository;
 
 namespace Insights.Controllers
 {
     public class YearlyRecordBookController : ApiController
     {
-        YearlyRecordBookRepository _yrb;
+        private YearlyRecordBookRepository _yrb;
         public YearlyRecordBookController()
         {
             _yrb = new YearlyRecordBookRepository();

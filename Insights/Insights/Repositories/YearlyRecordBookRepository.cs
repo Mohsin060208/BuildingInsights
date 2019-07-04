@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Insights.Models;
 using Insights.ViewModels;
 
-namespace Repository
+namespace Inights.Repository
 {
     public class YearlyRecordBookRepository
     {
@@ -10,13 +11,17 @@ namespace Repository
         {
             using (var context = new InsightsDBEntities())
             {
-                var records = context.GetTotalCost(tcv.Year,tcv.BuildingId);
-                foreach(var record in records)
-                {
-                    tcv.TotalCost = record.TotalCost;
-                    tcv.BuildingId = record.BuildingId;
-                    tcv.Year = record.Year;
-                }
+                var record = context.YearlyRecordBooks
+                    .SingleOrDefault(x => x.BuildingId == tcv.BuildingId
+                    && x.Year == tcv.Year);
+                    if (record == null || record.TotalCost == null)
+                    {
+                        tcv.TotalCost = 0;
+                    }
+                    else
+                    {
+                        tcv.TotalCost = record.TotalCost;
+                    }
             }
             return tcv;
         }
@@ -24,11 +29,15 @@ namespace Repository
         {
             using (var context = new InsightsDBEntities())
             {
-               var records = context.GetTotalSaving(tsv.Year, tsv.BuildingId);
-                foreach (var record in records)
+                var record = context.YearlyRecordBooks
+                     .SingleOrDefault(x => x.BuildingId == tsv.BuildingId
+                     && x.Year == tsv.Year);
+                if (record == null || record.TotalSaving == null)
                 {
-                    tsv.BuildingId = record.BuildingId;
-                    tsv.Year = record.Year;
+                    tsv.TotalSaving = 0;
+                }
+                else
+                {
                     tsv.TotalSaving = record.TotalSaving;
                 }
             }
@@ -38,11 +47,24 @@ namespace Repository
         {
             using (var context = new InsightsDBEntities())
             {
-                yrb.IsActive = true;
-                yrb.CreatedOn = DateTime.Now;
-                yrb.UpdatedOn = DateTime.Now;
-                int result = context.SaveTotalSaving(yrb.Year, yrb.TotalSaving, yrb.BuildingId, yrb.IsActive, yrb.CreatedOn, yrb.UpdatedOn);
-            }            
+                    var record = context.YearlyRecordBooks
+                     .SingleOrDefault(x => x.Year == yrb.Year
+                     && x.BuildingId == yrb.BuildingId);
+                if(record == null)
+                {
+                    yrb.IsActive = true;
+                    yrb.CreatedOn = DateTime.Now;
+                    yrb.UpdatedOn = DateTime.Now;
+                    context.YearlyRecordBooks.Add(yrb);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    record.UpdatedOn = DateTime.Now;
+                    record.TotalSaving = yrb.TotalSaving;
+                    context.SaveChanges();
+                }
+            }
             TotalSavingView tsv = new TotalSavingView();
             tsv.BuildingId = yrb.BuildingId;
             tsv.Year = yrb.Year;
@@ -52,10 +74,23 @@ namespace Repository
         {
             using (var context = new InsightsDBEntities())
             {
-                yrb.IsActive = true;
-                yrb.CreatedOn = DateTime.Now;
-                yrb.UpdatedOn = DateTime.Now;
-                int result = context.SaveTotalCost(yrb.Year, yrb.TotalCost, yrb.BuildingId, yrb.IsActive, yrb.CreatedOn, yrb.UpdatedOn);
+                var record = context.YearlyRecordBooks
+                      .SingleOrDefault(x => x.Year == yrb.Year
+                      && x.BuildingId == yrb.BuildingId);
+                if (record == null)
+                {
+                    yrb.IsActive = true;
+                    yrb.CreatedOn = DateTime.Now;
+                    yrb.UpdatedOn = DateTime.Now;
+                    context.YearlyRecordBooks.Add(yrb);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    record.UpdatedOn = DateTime.Now;
+                    record.TotalCost = yrb.TotalCost;
+                    context.SaveChanges();
+                }
             }
             TotalCostView tcv = new TotalCostView();
             tcv.BuildingId = yrb.BuildingId;

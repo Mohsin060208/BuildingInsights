@@ -1,4 +1,4 @@
-﻿using Repository;
+﻿using Insights.Repository;
 using System.Collections.Generic;
 using System.Web.Http;
 using Insights.ViewModels;
