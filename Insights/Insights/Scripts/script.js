@@ -237,12 +237,14 @@ function SaveFailures(model) {
             success: function (r) {
                 document.getElementById(model.Tb).value = "";
                 var array = new Array();
-                array.push(new Array("Year", "Failure"));
+                var colors = ["#f37277", "#8de9aa","#c3c3c3"];
+                array.push(new Array("Year", "Failure",
+                {role: "style"}));
                 arr = jQuery.grep(r, function (item) {
                     return (item.Type == model.Type);
                 });
-                arr.map(function (obj) {
-                    array.push(new Array(obj.Year, obj.Failure));
+                arr.map(function (obj,i) {
+                    array.push(new Array(obj.Year, obj.Failure, colors[i]));
                 });
                 model.Function(array);
             },
@@ -272,12 +274,14 @@ function SaveCosts(model) {
             success: function (r) {
                 document.getElementById(model.Tb).value = "";
                 var array = new Array();
-                array.push(new Array("Year", "Cost"));
+                var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+                array.push(new Array("Year", "Cost",
+                    { role: "style" }));
                 arr = jQuery.grep(r, function (item) {
                     return (item.Type == model.Type);
                 });
-                arr.map(function (obj) {
-                    array.push(new Array(obj.Year, obj.Cost));
+                arr.map(function (obj,i) {
+                    array.push(new Array(obj.Year, obj.Cost, colors[i]));
                 });
                 model.Function(array);
             },
@@ -406,7 +410,7 @@ function GetTotalSaving() {
 function drawChart(model) {
     var options = {
         bar: { groupWidth: "100%" },
-        legend: { position: "none" },
+        //legend: { position: "none" }
     };
     document.getElementById(model.Div).innerHTML = "";
     var data = google.visualization.arrayToDataTable(model.Data);
