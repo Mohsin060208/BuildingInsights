@@ -18,7 +18,7 @@ namespace Insights.Controllers
         // Updating the Failure Charts 
         [ActionName("InsertUpdateMechanicsFailure")]
         [HttpPost]
-        public List<MechanicsFailureView> InsertUpdateMechanicsFailure(Mechanics mechanics)
+        public IEnumerable<MechanicsFailureView> InsertUpdateMechanicsFailure(Mechanics mechanics)
         {
             return _mechanicsRepository.InsertUpdateMechanicsFailureByType(mechanics);
         }
@@ -26,7 +26,7 @@ namespace Insights.Controllers
         // Updating the Cost Charts  
         [ActionName("InsertUpdateMechanicsCost")]
         [HttpPost]
-        public List<MechanicsCostView> InsertUpdateMechanicsCost(Mechanics mechanics)
+        public IEnumerable<MechanicsCostView> InsertUpdateMechanicsCost(Mechanics mechanics)
         {
             return _mechanicsRepository.InsertUpdateMechanicsCostByType(mechanics);
         }
