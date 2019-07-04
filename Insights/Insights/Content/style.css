@@ -37,21 +37,11 @@
     width: 35px;
 }
 
-.arrow-smaller {
-    width: 15px;
-    height: 20px;
-}
-
 .p-arrow {
     color: white;
     font-size: 20px;
     font-weight: bold;
     margin-top: -12px;
-}
-
-.div-maintenance {
-    height: 60px;
-    background-color: white;
 }
 
 .button-save-building {
@@ -107,10 +97,6 @@
     background-color: white;
 }
 
-#p-compared {
-    font-size: 13px;
-}
-
 .p-label {
     margin-bottom: -25px;
     font-size: 11px;
@@ -118,11 +104,6 @@
 
 #div-elevator-failure {
     max-height: 280px;
-}
-
-#tb-total-failure {
-    width: 80px;
-    font-size: 18px;
 }
 
 .f12 {
@@ -195,6 +176,5 @@ select {
 }
 
 .error{
-    color: red;
-    font-size: 10px;
+    color: red;    
 }
