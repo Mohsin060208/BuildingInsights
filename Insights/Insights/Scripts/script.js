@@ -410,7 +410,7 @@ function GetTotalSaving() {
 function drawChart(model) {
     var options = {
         bar: { groupWidth: "100%" },
-        //legend: { position: "none" }
+        legend: { position: "none" },
     };
     document.getElementById(model.Div).innerHTML = "";
     var data = google.visualization.arrayToDataTable(model.Data);
