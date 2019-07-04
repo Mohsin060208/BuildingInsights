@@ -15,8 +15,8 @@ function GetRecords() {
         success: function (r) {
             document.getElementById("p-total-saving").innerText = ("$" + r[0].TotalSaving);
             document.getElementById("p-total-cost").innerText = ("$" + r[0].TotalCost);
-            var array = new Array();
             var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+            var array = new Array();
             array.push(new Array("Year", "Failure",
                 { role: "style" }));
             arr = jQuery.grep(r[1], function (item) {
