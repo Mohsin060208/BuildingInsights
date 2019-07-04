@@ -423,6 +423,7 @@ function drawChart(model) {
 
 function Validation(tb, p) {
     if (tb.length == 0) {
+        document.getElementById(p).className = "d-none";
         return false;
     }
     else {
