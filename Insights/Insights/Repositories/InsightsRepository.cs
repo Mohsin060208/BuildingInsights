@@ -16,48 +16,31 @@ namespace Insights.Repositories
                 var results = context.Mechanics
                     .Where(x => x.BuildingId == yrb.BuildingId)
                     .OrderBy(x => x.Year)
+                    .Select(x => new MechanicsView {
+                        Failure = (x.Failure == null ? 0 : x.Failure),
+                        Cost = (x.Cost == null ? 0 : x.Cost),
+                        Year = x.Year.ToString(),
+                        Type = x.Type
+                    })
                     .ToList();
-                foreach(var result in results)
+                foreach (var result in results)
                 {
-                    MechanicsView mechanics = new MechanicsView();
-                    mechanics.BuildingId = result.BuildingId;
-                    mechanics.Type = result.Type;
-                    if(result.Cost == null)
-                    {
-                        mechanics.Cost = 0;
-                    }
-                    else { mechanics.Cost = result.Cost; }
-                    if (result.Failure == null)
-                    {
-                        mechanics.Failure = 0;
-                    }
-                    else { mechanics.Failure = result.Failure; }
-                    mechanics.IsActive = result.IsActive;
-                    mechanics.CreatedOn = result.CreatedOn;
-                    mechanics.UpdatedOn = result.UpdatedOn;
-                    mechanics.Year = result.Year.ToString();
-                    chartData.Add(mechanics);
+                    chartData.Add(result);
                 }
                 var record = context.YearlyRecordBooks
-                    .SingleOrDefault(x => x.BuildingId == yrb.BuildingId 
+                    .SingleOrDefault(x => x.BuildingId == yrb.BuildingId
                     && x.Year == yrb.Year);
                     if (record == null)
                     {
                         yrb.TotalCost = 0;
                         yrb.TotalSaving = 0;
                     }
-                    else
-                    {
-                        yrb = record;
-                            if (yrb.TotalCost == null)
-                            {
-                                 yrb.TotalCost = 0;
-                            }
-                            if(yrb.TotalSaving == null)
-                            {
-                                 yrb.TotalSaving = 0;
-                            }
-                    }
+                else
+                {
+                    yrb = record;
+                    yrb.TotalCost = record.TotalCost == null ? 0 : record.TotalCost;
+                    yrb.TotalSaving = record.TotalSaving == null ? 0 : record.TotalSaving;
+                }
                 data.Add(yrb);
             }
             data.Add(chartData);

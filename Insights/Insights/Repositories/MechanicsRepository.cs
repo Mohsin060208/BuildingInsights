@@ -15,20 +15,18 @@ namespace Insights.Repository
             using (var context = new InsightsDBEntities())
             {
                 var results = context.Mechanics
-                    .Where(x => x.Type == mechanics.Type && x.BuildingId == mechanics.BuildingId)
-                    .OrderBy(x => x.Year);
+                    .Where(x => x.Type == mechanics.Type
+                    && x.BuildingId == mechanics.BuildingId)
+                    .OrderBy(x => x.Year)
+                    .Select(x => new MechanicsFailureView {
+                        Year = x.Year.ToString(),
+                        Failure = x.Failure == null ? 0 : x.Failure,
+                        Type = x.Type
+                    })
+                    .ToList();
                 foreach (var result in results)
                 {
-                    MechanicsFailureView mfv = new MechanicsFailureView();
-                    mfv.Type = result.Type;
-                    mfv.Year = result.Year.ToString();
-                    if (result.Failure == null)
-                    {
-                        mfv.Failure = 0;
-                    }
-                    else { mfv.Failure = result.Failure; }
-                    mfv.Failure = result.Failure;
-                    chartData.Add(mfv);
+                    chartData.Add(result);
                 }
             }          
             return chartData;
@@ -40,24 +38,19 @@ namespace Insights.Repository
             {
                 var results = context.Mechanics
                     .Where(x => x.Type == mechanics.Type && x.BuildingId == mechanics.BuildingId)
-                    .OrderBy(x => x.Year);
+                    .OrderBy(x => x.Year)
+                    .Select(x => new MechanicsCostView
+                    {
+                        Year = x.Year.ToString(),
+                        Cost = x.Cost == null ? 0 : x.Cost,
+                        Type = x.Type
+                    })
+                    .ToList();
                 foreach (var result in results)
                 {
-                    MechanicsCostView mcv = new MechanicsCostView();
-                    
-                    mcv.Type = result.Type;
-                    mcv.Year = result.Year.ToString();
-                    if (result.Cost == null)
-                    {
-                        mcv.Cost = 0;
-                    }
-                    else { mcv.Cost = result.Cost; }
-                    chartData.Add(mcv);
+                    chartData.Add(result);
                 }
             }
-            chartData.GroupBy(x => x.Year)
-           .Select(grp => grp.ToList())
-           .ToList();
             return chartData;
         }
         public List<MechanicsFailureView> InsertUpdateMechanicsFailureByType(Mechanics mechanics)
