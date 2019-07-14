@@ -15,6 +15,20 @@ namespace Insights.Controllers
             _mechanicsRepository = new MechanicsRepository();
         }
 
+        [ActionName("GetMaintenanceCost")]
+        [HttpGet]
+        public TotalCostView GetMaintenanceCost([FromUri] TotalCostView tcv)
+        {
+            return _mechanicsRepository.GetMaintenanceCost(tcv);
+        }
+
+        [ActionName("InsertUpdateMaintenanceCost")]
+        [HttpPost]
+        public TotalCostView InsertUpdateMaintenanceCost(Mechanics mechanics)
+        {
+            return _mechanicsRepository.InsertUpdateMaintenanceCost(mechanics);
+        }
+
         // Updating the Failure Charts 
         [ActionName("InsertUpdateMechanicsFailure")]
         [HttpPost]

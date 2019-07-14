@@ -9,93 +9,23 @@ function GetRecords() {
             'Content-Type': 'application/json'
         },
         data: {
-            "Year": 2018,
-            "BuildingId": 1
+            "BuildingId": 1,
         },
         success: function (r) {
-            document.getElementById("p-total-saving").innerText = ("$" + r[0].TotalSaving);
-            document.getElementById("p-total-cost").innerText = ("$" + r[0].TotalCost);
-            var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
-            var array = new Array();
-            array.push(new Array("Year", "Failure",
-                { role: "style" }));
-            arr = jQuery.grep(r[1], function (item) {
-                return (item.Type == "Elevator");
+            var arr = jQuery.grep(r, function (item) {
+                return (item.Type == "MaintenanceCost" && item.Year == "2018");
             });
-            arr.map(function (obj,i) {
-                array.push(new Array(obj.Year, obj.Failure, colors[i]));
+            arr.map(function (obj) {
+                document.getElementById("p-total-cost").innerText = ("$" + obj.Cost);    
             });
-            drawChartElevatorFailure(array);
-            var array = new Array();
-            array.push(new Array("Year", "Failure",
-                { role: "style" }));
-            arr = jQuery.grep(r[1], function (item) {
-                return (item.Type == "Boiler");
+            var arr = jQuery.grep(r, function (item) {
+                return (item.Type == "MaintenanceSaving" && item.Year == "2018");
             });
-            arr.map(function (obj,i) {
-                array.push(new Array(obj.Year, obj.Failure, colors[i]));
+            arr.map(function (obj) {
+                document.getElementById("p-total-saving").innerText = ("$" + obj.Cost);
             });
-            drawChartBoilerFailure(array);
-            var array = new Array();
-            array.push(new Array("Year", "Failure",
-                { role: "style" }));
-            arr = jQuery.grep(r[1], function (item) {
-                return (item.Type == "Chiller");
-            });
-            arr.map(function (obj,i) {
-                array.push(new Array(obj.Year, obj.Failure, colors[i]));
-            });
-            drawChartChillerFailure(array);
-            var array = new Array();
-            array.push(new Array("Year", "Cost",
-                { role: "style" }));
-            arr = jQuery.grep(r[1], function (item) {
-                return (item.Type == "Elevator");
-            });
-            arr.map(function (obj,i) {
-                array.push(new Array(obj.Year, obj.Cost, colors[i]));
-            });
-            drawChartElevatorSpend(array);
-            var array = new Array();
-            array.push(new Array("Year", "Cost",
-                { role: "style" }));
-            arr = jQuery.grep(r[1], function (item) {
-                return (item.Type == "Boiler");
-            });
-            arr.map(function (obj,i) {
-                array.push(new Array(obj.Year, obj.Cost, colors[i]));
-            });
-            drawChartBoilerCost(array);
-            var array = new Array();
-            array.push(new Array("Year", "Cost",
-                { role: "style" }));
-            arr = jQuery.grep(r[1], function (item) {
-                return (item.Type == "Operational Plumbing");
-            });
-            arr.map(function (obj,i) {
-                array.push(new Array(obj.Year, obj.Cost, colors[i]));
-            });
-            drawChartPlumberOperational(array);
-            var array = new Array();
-            array.push(new Array("Year", "Cost",
-                { role: "style" }));
-            arr = jQuery.grep(r[1], function (item) {
-                return (item.Type == "Plumbing");
-            });
-            arr.map(function (obj,i) {
-                array.push(new Array(obj.Year, obj.Cost, colors[i]));
-            });
-            drawChartPlumberSpend(array);
-            var array = new Array();
-            array.push(new Array("Year", "Cost",
-                { role: "style" }));
-            arr = jQuery.grep(r[1], function (item) {
-                return (item.Type == "Chiller");
-            });
-            arr.map(function (obj,i) {
-                array.push(new Array(obj.Year, obj.Cost, colors[i]));
-            });
-            drawChartChillerCost(array);
+            drawFailureCharts(r)
+            drawCostCharts(r);
         },
         failure: function (r) {
             alert("Failed");
@@ -104,4 +34,16 @@ function GetRecords() {
             alert(r);
         }
     });
+}
+function drawFailureCharts(r) {
+    drawChartElevatorFailure(r);
+    drawChartChillerFailure(r);
+    drawChartBoilerFailure(r);
+}
+function drawCostCharts(r) {
+    drawChartElevatorSpend(r);
+    drawChartChillerCost(r);
+    drawChartBoilerCost(r);
+    drawChartPlumberSpend(r);
+    drawChartPlumberOperational(r);
 }

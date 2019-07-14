@@ -13,7 +13,6 @@ namespace Insights.Models
         }
 
         public virtual DbSet<Mechanics> Mechanics { get; set; }
-        public virtual DbSet<YearlyRecordBook> YearlyRecordBooks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

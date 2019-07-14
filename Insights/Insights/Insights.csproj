@@ -104,13 +104,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\InsightsController.cs" />
     <Compile Include="Controllers\MechanicsController.cs" />
-    <Compile Include="Controllers\YearlyRecordBookController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Mechanics.cs" />
     <Compile Include="Models\InsightsDBEntities.cs" />
-    <Compile Include="Models\YearlyRecordBook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -119,12 +117,10 @@
     </Compile>
     <Compile Include="Repositories\InsightsRepository.cs" />
     <Compile Include="Repositories\MechanicsRepository.cs" />
-    <Compile Include="Repositories\YearlyRecordBookRepository.cs" />
     <Compile Include="ViewModels\MechanicsCostView.cs" />
     <Compile Include="ViewModels\MechanicsFailureView.cs" />
     <Compile Include="ViewModels\MechanicsView.cs" />
     <Compile Include="ViewModels\TotalCostView.cs" />
-    <Compile Include="ViewModels\TotalSavingView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -160,7 +156,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55941</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44358/</IISUrl>
+          <IISUrl>https://localhost:44360/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

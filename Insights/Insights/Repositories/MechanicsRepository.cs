@@ -9,6 +9,52 @@ namespace Insights.Repository
 {
     public class MechanicsRepository
     {
+        public TotalCostView GetMaintenanceCost(TotalCostView tcv)
+        {
+            using (var context = new InsightsDBEntities())
+            {
+                var record = context.Mechanics
+                 .SingleOrDefault(x => x.BuildingId == tcv.BuildingId
+                && x.Type == tcv.Type && x.Year == tcv.Year);
+                if (record == null || record.Cost == null)
+                {
+                    tcv.Cost = 0;
+                }
+                else
+                {
+                    tcv.Cost = record.Cost;
+                }
+            }
+            return tcv;
+        }
+        public TotalCostView InsertUpdateMaintenanceCost(Mechanics mechanics)
+        {
+            using (var context = new InsightsDBEntities())
+            {
+                var record = context.Mechanics
+                      .SingleOrDefault(x => x.Year == mechanics.Year
+                      && x.BuildingId == mechanics.BuildingId && x.Type == mechanics.Type);
+                if (record == null)
+                {
+                    mechanics.IsActive = true;
+                    mechanics.CreatedOn = DateTime.Now;
+                    mechanics.UpdatedOn = DateTime.Now;
+                    context.Mechanics.Add(mechanics);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    record.UpdatedOn = DateTime.Now;
+                    record.Cost = mechanics.Cost;
+                    context.SaveChanges();
+                }
+            }
+            TotalCostView tcv = new TotalCostView();
+            tcv.BuildingId = mechanics.BuildingId;
+            tcv.Year = mechanics.Year;
+            tcv.Type = mechanics.Type;
+            return GetMaintenanceCost(tcv);
+        }
         public List<MechanicsFailureView> GetMechanicsFailureByType(Mechanics mechanics)
         {
             List<MechanicsFailureView> chartData = new List<MechanicsFailureView>();

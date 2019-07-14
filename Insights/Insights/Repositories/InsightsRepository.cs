@@ -7,43 +7,22 @@ namespace Insights.Repositories
 {
     public class InsightsRepository
     {
-        public List<object> GetAll(YearlyRecordBook yrb)
+        public List<MechanicsView> GetAll(Mechanics mechanics)
         {
-            List<object> data = new List<object>();
-            List<MechanicsView> chartData = new List<MechanicsView>();
+            List<MechanicsView> data = new List<MechanicsView>();
             using (var context = new InsightsDBEntities())
             {
-                var results = context.Mechanics
-                    .Where(x => x.BuildingId == yrb.BuildingId)
+                 data = context.Mechanics
+                    .Where(x => x.BuildingId == mechanics.BuildingId)
                     .OrderBy(x => x.Year)
                     .Select(x => new MechanicsView {
                         Failure = (x.Failure == null ? 0 : x.Failure),
                         Cost = (x.Cost == null ? 0 : x.Cost),
                         Year = x.Year.ToString(),
-                        Type = x.Type
+                        Type = x.Type,
                     })
-                    .ToList();
-                foreach (var result in results)
-                {
-                    chartData.Add(result);
-                }
-                var record = context.YearlyRecordBooks
-                    .SingleOrDefault(x => x.BuildingId == yrb.BuildingId
-                    && x.Year == yrb.Year);
-                    if (record == null)
-                    {
-                        yrb.TotalCost = 0;
-                        yrb.TotalSaving = 0;
-                    }
-                else
-                {
-                    yrb = record;
-                    yrb.TotalCost = record.TotalCost == null ? 0 : record.TotalCost;
-                    yrb.TotalSaving = record.TotalSaving == null ? 0 : record.TotalSaving;
-                }
-                data.Add(yrb);
+                    .ToList();                
             }
-            data.Add(chartData);
             return data;
         }
     }

@@ -81,15 +81,16 @@ function SaveTotalCost() {
     if (valid == true) { 
         $.ajax({
             type: "POST",
-            url: "/api/YearlyRecordBook/InsertUpdateTotalCost",
+            url: "/api/mechanics/InsertUpdateMaintenanceCost",
             data: {
                 Year: $("#select-year-cost").val(),
-                TotalCost: $("#tb-total-cost").val(),
-                BuildingId: 1
+                Cost: $("#tb-total-cost").val(),
+                BuildingId: 1,
+                Type: "MaintenanceCost"
             },
             success: function (r) {
-                document.getElementById("p-total-cost").innerText = ("$" + r.TotalCost);
-                $("#tb-total-cost").val("")
+                document.getElementById("p-total-cost").innerText = ("$" + r.Cost);
+                $("#tb-total-cost").val("");
             },
             failure: function (r) {
                 alert(r);
@@ -107,14 +108,15 @@ function SaveTotalSaving() {
     if (valid == true) {
         $.ajax({
             type: "POST",
-            url: "/api/YearlyRecordBook/InsertUpdateTotalSaving",
+            url: "/api/mechanics/InsertUpdateMaintenanceCost",
             data: {
                 Year: $("#select-year-saving").val(),
-                TotalSaving: $("#tb-total-savings").val(),
-                BuildingId: 1
+                Cost: $("#tb-total-savings").val(),
+                BuildingId: 1,
+                Type: "MaintenanceSaving"
             },
             success: function (r) {
-                document.getElementById("p-total-saving").innerText = ("$" + r.TotalSaving);
+                document.getElementById("p-total-saving").innerText = ("$" + r.Cost);
                 $("#tb-total-savings").val("");
             },
             failure: function (r) {
@@ -133,7 +135,7 @@ function SaveElevatorFailure() {
         Type: "Elevator",
         Year: $("#select-year-elevator-failure").val(),
         Failure: $("#tb-elevator-failure").val(),
-        Function: drawChartElevatorFailure
+        Div: "chart-elevator-failure"
     }
     SaveFailures(model);
 }
@@ -144,7 +146,7 @@ function SaveBoilerFailure() {
         Type: "Boiler",
         Year: $("#select-year-boiler-failure").val(),
         Failure: $("#tb-boiler-failure").val(),
-        Function: drawChartBoilerFailure
+        Div: "chart-boiler-failure"
     }
     SaveFailures(model);
 }
@@ -155,7 +157,7 @@ function SaveChillerFailure() {
         Type: "Chiller",
         Year: $("#select-year-chiller-failure").val(),
         Failure: $("#tb-chiller-failure").val(),
-        Function: drawChartChillerFailure
+        Div: "chart-chiller-failure"
     }
     SaveFailures(model);
 }
@@ -166,7 +168,7 @@ function SaveElevatorCost() {
         Type: "Elevator",
         Year: $("#select-year-elevator-cost").val(),
         Cost: $("#tb-elevator-cost").val(),
-        Function: drawChartElevatorSpend
+        Div: "chart-elevator-spend"
     }
     SaveCosts(model);
 }
@@ -178,7 +180,7 @@ function SavePlumbingCost() {
         Type: "Plumbing",
         Year: $("#select-year-plumbing").val(),
         Cost: $("#tb-plumbing-cost").val(),
-        Function: drawChartPlumberSpend
+        Div: "chart-plumber-spend"
     }
     SaveCosts(model);
 }
@@ -189,7 +191,7 @@ function SaveOperationalPlumbingCost() {
         Type: "Operational Plumbing",
         Year: $("#select-year-operational-plumbing").val(),
         Cost: $("#tb-operational-plumbing-cost").val(),
-        Function: drawChartPlumberOperational
+        Div: "chart-plumber-operational"
     }
     SaveCosts(model);
 }
@@ -201,7 +203,7 @@ function SaveBoilerCost() {
         Type: "Boiler",
         Year: $("#select-year-boiler-cost").val(),
         Cost: $("#tb-boiler-cost").val(),
-        Function: drawChartBoilerCost
+        Div: "chart-boiler-cost"
     }
     SaveCosts(model);
 }
@@ -213,7 +215,7 @@ function SaveChillerCost() {
         Type: "Chiller",
         Year: $("#select-year-chiller-cost").val(),
         Cost: $("#tb-chiller-cost").val(),
-        Function: drawChartChillerCost
+        Div: "chart-chiller-cost"
     }
     SaveCosts(model);
 }
@@ -236,13 +238,14 @@ function SaveFailures(model) {
                 var colors = ["#f37277", "#8de9aa","#c3c3c3"];
                 array.push(new Array("Year", "Failure",
                 {role: "style"}));
-                arr = jQuery.grep(r, function (item) {
-                    return (item.Type == model.Type);
-                });
-                arr.map(function (obj,i) {
+                r.map(function (obj,i) {
                     array.push(new Array(obj.Year, obj.Failure, colors[i]));
                 });
-                model.Function(array);
+                var obj = {
+                    Div: model.Div,
+                    Data: array
+                }
+                drawChart(obj);
             },
             failure: function (r) {
                 alert(r);
@@ -273,13 +276,14 @@ function SaveCosts(model) {
                 var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
                 array.push(new Array("Year", "Cost",
                     { role: "style" }));
-                arr = jQuery.grep(r, function (item) {
-                    return (item.Type == model.Type);
-                });
-                arr.map(function (obj,i) {
+                r.map(function (obj, i) {
                     array.push(new Array(obj.Year, obj.Cost, colors[i]));
                 });
-                model.Function(array);
+                var obj = {
+                    Div: model.Div,
+                    Data: array
+                }
+                drawChart(obj);
             },
             failure: function (r) {
                 alert(r);
@@ -293,84 +297,165 @@ function SaveCosts(model) {
 
 // Functions for Getting Data
 
-function drawChartElevatorFailure(data) {
+function drawChartElevatorFailure(r) {
+    var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+    var array = new Array();
+    array.push(new Array("Year", "Failure",
+        { role: "style" }));
+    arr = jQuery.grep(r, function (item) {
+        return (item.Type == "Elevator");
+    });
+    arr.map(function (obj, i) {
+        array.push(new Array(obj.Year, obj.Failure, colors[i]));
+    });
     var model = {
         Div: "chart-elevator-failure",
-        Data: data
+        Data: array
     }
     drawChart(model);
 }
 
-function drawChartElevatorSpend(data) {
+function drawChartElevatorSpend(r) {
+    var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+    var array = new Array();
+    array.push(new Array("Year", "Cost",
+        { role: "style" }));
+    arr = jQuery.grep(r, function (item) {
+        return (item.Type == "Elevator");
+    });
+    arr.map(function (obj, i) {
+        array.push(new Array(obj.Year, obj.Cost, colors[i]));
+    });
     var model = {
-        Data: data,
+        Data: array,
         Div: "chart-elevator-spend"
     }
     drawChart(model);
 }
 
-function drawChartPlumberSpend(data) {
+function drawChartPlumberSpend(r) {
+    var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+    var array = new Array();
+    array.push(new Array("Year", "Cost",
+        { role: "style" }));
+    arr = jQuery.grep(r, function (item) {
+        return (item.Type == "Chiller");
+    });
+    console.log(arr);
+    arr.map(function (obj, i) {
+        array.push(new Array(obj.Year, obj.Cost, colors[i]));
+    });
     var model = {
-        Data: data,
+        Data: array,
         Div: "chart-plumber-spend"
     }
     drawChart(model);
 }
 
-function drawChartPlumberOperational(data) {
+function drawChartPlumberOperational(r) {
+    var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+    var array = new Array();
+    array.push(new Array("Year", "Cost",
+        { role: "style" }));
+    arr = jQuery.grep(r, function (item) {
+        return (item.Type == "OperationalPlumbing");
+    });
+    arr.map(function (obj, i) {
+        array.push(new Array(obj.Year, obj.Cost, colors[i]));
+    });
     var model = {
-        Data: data,
+        Data: array,
         Div: "chart-plumber-operational"
     }
     drawChart(model);
 }
 
-function drawChartBoilerFailure(data) {
+function drawChartBoilerFailure(r) {
+    var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+    var array = new Array();
+    array.push(new Array("Year", "Failure",
+        { role: "style" }));
+    arr = jQuery.grep(r, function (item) {
+        return (item.Type == "Boiler");
+    });
+    arr.map(function (obj, i) {
+        array.push(new Array(obj.Year, obj.Failure, colors[i]));
+    });
     var model = {
         Div: "chart-boiler-failure",
-        Data: data
+        Data: array
     }
     drawChart(model);
 }
 
-function drawChartBoilerCost(data) {
+function drawChartBoilerCost(r) {
+    var array = new Array();
+    array.push(new Array("Year", "Cost",
+        { role: "style" }));
+    var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+    arr = jQuery.grep(r, function (item) {
+        return (item.Type == "Boiler");
+    });
+    arr.map(function (obj, i) {
+        array.push(new Array(obj.Year, obj.Cost, colors[i]));
+    });
     var model = {
         Div: "chart-boiler-cost",
-        Data: data
+        Data: array
     }
     drawChart(model);
 }
 
-function drawChartChillerFailure(data) {
+function drawChartChillerFailure(r) {
+    var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+    var array = new Array();
+    array.push(new Array("Year", "Failure",
+        { role: "style" }));
+    arr = jQuery.grep(r, function (item) {
+        return (item.Type == "Chiller");
+    });
+    arr.map(function (obj, i) {
+        array.push(new Array(obj.Year, obj.Failure, colors[i]));
+    });
     var model = {
         Div: "chart-chiller-failure",
-        Data: data
+        Data: array
     }
     drawChart(model);
 }
 
-function drawChartChillerCost(data) {
+function drawChartChillerCost(r) {
+    var colors = ["#f37277", "#8de9aa", "#c3c3c3"];
+    var array = new Array();
+    array.push(new Array("Year", "Cost",
+        { role: "style" }));
+    arr = jQuery.grep(r, function (item) {
+        return (item.Type == "Chiller");
+    });
+    arr.map(function (obj, i) {
+        array.push(new Array(obj.Year, obj.Cost, colors[i]));
+    });
     var model = {
         Div: "chart-chiller-cost",
-        Data: data
+        Data: array
     }
     drawChart(model);
 }
-
 
 function GetTotalCost() {
     $.ajax({
         type: "GET",
-        url: "/api/YearlyRecordBook/GetTotalCost",
+        url: "/api/mechanics/GetMaintenanceCost",
         headers: {
             'Content-Type': 'application/json'
         },
         data: {
             "Year": $("#select-year-cost").val(),
-            "BuildingId": 1
+            "BuildingId": 1,
+            "Type": "MaintenanceCost"
         },
         success: function (r) {
-            document.getElementById("p-total-cost").innerText = ("$" + r.TotalCost);
+            document.getElementById("p-total-cost").innerText = ("$" + r.Cost);
         },
         failure: function (r) {
             alert(r);
@@ -383,16 +468,17 @@ function GetTotalCost() {
 function GetTotalSaving() {
     $.ajax({
         type: "GET",
-        url: "/api/YearlyRecordBook/GetTotalSaving",
+        url: "/api/mechanics/GetMaintenanceCost",
         headers: {
             'Content-Type': 'application/json'
         },
         data: {
             "Year": $("#select-year-saving").val(),
-            "BuildingId": 1
+            "BuildingId": 1,
+            "Type": "MaintenanceSaving"
         },
         success: function (r) {
-            document.getElementById("p-total-saving").innerText = ("$" + r.TotalSaving);
+            document.getElementById("p-total-saving").innerText = ("$" + r.Cost);
         },
         failure: function (r) {
             alert(r);

@@ -1,10 +1,7 @@
 ﻿using Insights.Models;
 using Insights.Repositories;
-using System;
+using Insights.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Insights.Controllers
@@ -18,9 +15,9 @@ namespace Insights.Controllers
         }
         [ActionName("Get")]
         [HttpGet]
-        public IEnumerable<object> Get([FromUri] YearlyRecordBook yrb)
+        public IEnumerable<object> Get([FromUri] Mechanics mechanics)
         {
-            return _insights.GetAll(yrb);
+            return _insights.GetAll(mechanics);
         }
     }
 }
