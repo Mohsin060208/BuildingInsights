@@ -19,7 +19,7 @@ namespace Insights.Repositories
                         Failure = (x.Failure == null ? 0 : x.Failure),
                         Cost = (x.Cost == null ? 0 : x.Cost),
                         Year = x.Year.ToString(),
-                        Type = x.Type.ToString(),
+                        Type = x.Type.ToString()
                     })
                     .ToList();                
             }
