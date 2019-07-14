@@ -15,7 +15,7 @@ namespace Insights.Repository
             {
                 var record = context.Mechanics
                  .SingleOrDefault(x => x.BuildingId == tcv.BuildingId
-                && x.Type == tcv.Type && x.Year == tcv.Year);
+                && x.Type.ToString() == tcv.Type && x.Year == tcv.Year);
                 if (record == null || record.Cost == null)
                 {
                     tcv.Cost = 0;
@@ -52,7 +52,7 @@ namespace Insights.Repository
             TotalCostView tcv = new TotalCostView();
             tcv.BuildingId = mechanics.BuildingId;
             tcv.Year = mechanics.Year;
-            tcv.Type = mechanics.Type;
+            tcv.Type = mechanics.Type.ToString();
             return GetMaintenanceCost(tcv);
         }
         public List<MechanicsFailureView> GetMechanicsFailureByType(Mechanics mechanics)
@@ -67,7 +67,7 @@ namespace Insights.Repository
                     .Select(x => new MechanicsFailureView {
                         Year = x.Year.ToString(),
                         Failure = x.Failure == null ? 0 : x.Failure,
-                        Type = x.Type
+                        Type = x.Type.ToString()
                     })
                     .ToList();
                 foreach (var result in results)
@@ -89,7 +89,7 @@ namespace Insights.Repository
                     {
                         Year = x.Year.ToString(),
                         Cost = x.Cost == null ? 0 : x.Cost,
-                        Type = x.Type
+                        Type = x.Type.ToString()
                     })
                     .ToList();
                 foreach (var result in results)

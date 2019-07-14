@@ -17,8 +17,7 @@ namespace Insights.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Mechanics>()
-                .Property(e => e.Type)
-                .IsUnicode(false);
+                .Property(e => e.Type);
         }
     }
 }

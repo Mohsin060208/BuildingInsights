@@ -9,9 +9,7 @@ namespace Insights.Models
 
         public int BuildingId { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Type { get; set; }
+        public Types Type { get; set; }
 
         public long? Cost { get; set; }
 
@@ -24,5 +22,14 @@ namespace Insights.Models
         public DateTime CreatedOn { get; set; }
 
         public DateTime UpdatedOn { get; set; }
+    }
+    public enum Types{
+        Elevator,
+        Boiler,
+        Chiller,
+        Plumbing,
+        OperationalPlumbing,
+        MaintenanceCost,
+        MaintenanceSaving
     }
 }
